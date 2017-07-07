@@ -25,7 +25,8 @@ class Article extends Component {
         return <p>{this.props.article.text}</p>
     }
 
-    handleClick = () => {
+    handleClick = (ev) => {
+        ev.preventDefault()
         this.setState({
             isOpen: !this.state.isOpen
         })

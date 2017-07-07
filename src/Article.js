@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import CommentsList from './CommentsList'
 
 class Article extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isCommentsOpen: false
         }
     }
 
@@ -22,7 +24,28 @@ class Article extends Component {
     getBody() {
         if (!this.state.isOpen) return null
 
-        return <p>{this.props.article.text}</p>
+        return (
+            <div>
+                <p>{this.props.article.text}</p>
+                {this.getComments()}
+            </div>
+        )
+    }
+
+    getComments() {
+        if (!this.state.isCommentsOpen) return <div onClick = {this.handleCommentsClick}>Show Comments</div>
+        if (this.props.article.comments) return (
+            <div>
+                <div onClick = {this.handleCommentsClick}>Hide Comments</div>
+                <CommentsList comments = {this.props.article.comments} />
+            </div>
+        )
+        return (
+            <div>
+                <div onClick = {this.handleCommentsClick}>Hide Comments</div>
+                <div>No comments</div>
+            </div>
+        )
     }
 
     handleClick = (ev) => {
@@ -31,18 +54,13 @@ class Article extends Component {
             isOpen: !this.state.isOpen
         })
     }
-}
 
-/*
-function Article(props) {
-    const { article } = props
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <p>{article.text}</p>
-        </div>
-    )
+    handleCommentsClick = (ev) => {
+        ev.preventDefault()
+        this.setState({
+            isCommentsOpen: !this.state.isCommentsOpen
+        })
+    }
 }
-*/
 
 export default Article

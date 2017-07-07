@@ -22,7 +22,7 @@ class CommentsList extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleClick}>{this.state.isOpen ? 'Hide comments' : 'Show comments'}</button>
+                <button onClick = {this.handleClick}> {this.state.isOpen ? 'Hide comments' : 'Show comments'} </button>
                 {this.state.isOpen ? <ul> {this.getComments()} </ul> : null}
             </div>
         )

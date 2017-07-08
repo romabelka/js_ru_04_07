@@ -29,7 +29,7 @@ class CommentList extends Component {
 
         const { comments = [] } = this.props;
 
-        return comments.map(item => <Comment comment={item} key={item.id} /> )
+        return <ul>{comments.map(item => <Comment comment={item} key={item.id} />)}</ul>
     }
 
     handleClick = (ev) => {

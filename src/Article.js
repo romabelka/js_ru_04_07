@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import ArticleComment from './ArticleComment'
 
 class Article extends Component {
     constructor(props) {
@@ -15,8 +16,24 @@ class Article extends Component {
             <div>
                 <h3 onClick = {this.handleClick}>{article.title}</h3>
                 {this.getBody()}
+                {this.getComments(article.comments)}
             </div>
         )
+    }
+
+    getComments(comments) {
+        if (!comments || !comments.length) return;
+
+        return (
+            <div>
+                <h4>Комментарии</h4>
+                <ul>
+                    {comments.map(comment =>
+                        <ArticleComment key={comment.id} user={comment.user} text={comment.text} />
+                    )}
+                </ul>
+            </div>
+        );
     }
 
     getBody() {

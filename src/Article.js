@@ -2,15 +2,16 @@ import React, {Component} from 'react'
 
 class Article extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+            button: false
         }
     }
 
     render() {
-        const { article } = this.props
+        const { article } = this.props;
         return (
             <div>
                 <h3 onClick = {this.handleClick}>{article.title}</h3>
@@ -20,29 +21,38 @@ class Article extends Component {
     }
 
     getBody() {
-        if (!this.state.isOpen) return null
+        if (!this.state.isOpen) return null;
 
-        return <p>{this.props.article.text}</p>
+        return <div>
+            <p>{this.props.article.text}</p>
+            <button onClick={this.handleOpenComment}>{this.state.button ? "Открыть комментрий" : "Закрыть комментарий"}</button>
+            {this.getComment()}
+            </div>
     }
 
+    getComment(){
+        if (this.state.button){
+            return this.props.article.comments.map(key => {
+                return <div>
+                    <h4>Комментраий от: {key.user}</h4>
+                    <h5>Тескст комментария {key.text}</h5>
+                </div>
+            })
+        }
+    }
+
+    handleOpenComment = () => {
+        this.setState({
+            button: !this.state.button
+        })
+    };
+
     handleClick = (ev) => {
-        ev.preventDefault()
+        ev.preventDefault();
         this.setState({
             isOpen: !this.state.isOpen
         })
-    }
+    };
 }
-
-/*
-function Article(props) {
-    const { article } = props
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <p>{article.text}</p>
-        </div>
-    )
-}
-*/
 
 export default Article

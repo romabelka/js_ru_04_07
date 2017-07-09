@@ -29,11 +29,16 @@ class Article extends Component {
 
   /**
    * Формируем содержимое статьи в зависимости от стейта
-   * @returns {Element}
+   * @returns {HTMLElement}
    */
   getBody() {
     if (!this.state.isOpen) return null;
-    return <div><p>{this.props.article.text}</p>{this.getComments()}</div>
+    return (
+      <div>
+        <p>{this.props.article.text}</p>
+        {this.getComments()}
+      </div>
+    )
   }
 
   /**

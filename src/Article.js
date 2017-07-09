@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentsList from './CommentsList'
 
 class Article extends Component {
     constructor(props) {
@@ -14,35 +15,33 @@ class Article extends Component {
         return (
             <div>
                 <h3 onClick = {this.handleClick}>{article.title}</h3>
-                {this.getBody()}
+                {this.showArticle()}
             </div>
         )
     }
 
-    getBody() {
-        if (!this.state.isOpen) return null
+    getBody(body) {
+        if (!this.state.isOpen) return null;
 
-        return <p>{this.props.article.text}</p>
+        return body;
+    }
+
+    showArticle() {
+        const body =  <div>
+                        <p>{this.props.article.text}</p>
+                        <CommentsList article = {this.props.article} />
+                      </div>
+
+        return this.getBody(body);
     }
 
     handleClick = (ev) => {
         ev.preventDefault()
+
         this.setState({
             isOpen: !this.state.isOpen
         })
     }
 }
-
-/*
-function Article(props) {
-    const { article } = props
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <p>{article.text}</p>
-        </div>
-    )
-}
-*/
 
 export default Article

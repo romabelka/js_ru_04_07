@@ -3,4 +3,4 @@ import {render} from 'react-dom'
 import ArticlesList from './ArticlesList'
 import {articles} from './fixtures'
 
-render(<ArticlesList articles = {articles} />, document.getElementById('container'))
+render(<ArticlesList articles = {articles} />, document.getElementById('container'));

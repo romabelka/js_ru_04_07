@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import CommentList from './CommentList'
+import Comment from './Comment'
 
-class Article extends Component {
+class CommentList extends Component {
     constructor(props) {
         super(props)
 
@@ -11,26 +11,23 @@ class Article extends Component {
     }
 
     render() {
-        const { article } = this.props
         return (
             <div>
-                <h3 onClick = {this.handleClick}>{article.title}</h3>
+                <h4 onClick = {this.handleClick}>Comments ({!this.state.isOpen ? 'show' : 'hide'})</h4>
                 {this.getBody()}
-                {this.getComments()}
             </div>
         )
     }
 
     getBody() {
         if (!this.state.isOpen) return null
-
-        return <p>{this.props.article.text}</p>
-    }
-
-    getComments() {
-        const { article } = this.props
-        if ( !article.comments ) return null
-        return <p><CommentList comments = {article.comments}/></p>
+        const { comments } = this.props
+        const commentElements = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
+        return (
+            <ul>
+                {commentElements}
+            </ul>
+        )
     }
 
     handleClick = (ev) => {
@@ -41,4 +38,4 @@ class Article extends Component {
     }
 }
 
-export default Article
+export default CommentList

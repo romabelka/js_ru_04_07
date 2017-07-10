@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
     constructor(props) {
@@ -22,7 +23,12 @@ class Article extends Component {
     getBody() {
         if (!this.state.isOpen) return null
 
-        return <p>{this.props.article.text}</p>
+        return (
+            <div>
+                <p>{this.props.article.text}</p>
+                <CommentList comments = {this.props.article.comments}/>
+            </div>
+        );
     }
 
     handleClick = (ev) => {

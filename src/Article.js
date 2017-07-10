@@ -1,11 +1,14 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import CommentsList from './CommentsList';
 
 class Article extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+            buttonIsOpen: false,
+            buttonText: "Open comments"
         }
     }
 
@@ -16,13 +19,29 @@ class Article extends Component {
                 <h3 onClick = {this.handleClick}>{article.title}</h3>
                 {this.getBody()}
             </div>
+
         )
     }
 
     getBody() {
         if (!this.state.isOpen) return null
 
-        return <p>{this.props.article.text}</p>
+        return (
+          <div>
+              <p>{this.props.article.text}</p>
+              <button onClick = {this.handleButtonClick}>{this.state.buttonText}</button>
+              {this.getComments()}
+          </div>
+        )
+    }
+    getComments() {
+        if (!this.state.buttonIsOpen) return null
+
+        return (
+          <div>
+              <CommentsList comments = {this.props.article.comments}/>
+          </div>
+        )
     }
 
     handleClick = (ev) => {
@@ -30,6 +49,21 @@ class Article extends Component {
         this.setState({
             isOpen: !this.state.isOpen
         })
+    }
+    handleButtonClick = (ev) => {
+      this.setState({
+          buttonIsOpen: !this.state.buttonIsOpen
+      })
+      if(!this.state.buttonIsOpen) {
+        this.setState({
+            buttonText: "Close comments"
+        })
+      } else {
+        this.setState({
+            buttonText: "Open comments"
+        })
+      }
+
     }
 }
 

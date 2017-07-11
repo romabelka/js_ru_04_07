@@ -6,6 +6,10 @@ class CommentList extends Component {
         isOpen: false
     }
 
+    static defaultProps = {
+        comments: []
+    }
+
     render() {
         const { isOpen } = this.state
         return (
@@ -19,7 +23,7 @@ class CommentList extends Component {
     getBody() {
         if (!this.state.isOpen) return null
         const { comments } = this.props
-        if (!comments || !comments.length) return <h3>No comments yet</h3>
+        if (!comments.length) return <h3>No comments yet</h3>
         return (
             <ul>
                 {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}

@@ -6,7 +6,8 @@ class Article extends Component {
         super(props)
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+			isCommentOpen: false
         }
     }
 
@@ -16,6 +17,8 @@ class Article extends Component {
             <div>
                 <h3 onClick = {this.handleClick}>{article.title}</h3>
                 {this.getBody()}
+				<h4 onClick = {this.handleClickComment}><i>{this.getCommentOpen()}</i></h4>
+				<ul>{this.getCommets()}</ul>
             </div>
         )
     }
@@ -30,6 +33,18 @@ class Article extends Component {
             </div>
         )
     }
+	
+	getCommets() {
+        if (!this.state.isCommentOpen) return null
+
+        return this.CommentList(this.props.article.comments)
+    }
+	
+	getCommentOpen(){
+		if (!this.state.isCommentOpen) return "Показать комментарии"
+
+        return "Скрыть комментарии"
+	}
 
     handleClick = (ev) => {
         ev.preventDefault()
@@ -37,6 +52,26 @@ class Article extends Component {
             isOpen: !this.state.isOpen
         })
     }
+	
+	handleClickComment =  (ev) => {
+        ev.preventDefault()
+        this.setState({
+            isCommentOpen: !this.state.isCommentOpen
+        })
+    }
+	
+	CommentList(comments){
+		if(comments){
+			return comments.map(comment =>
+				<li key = {comment.id}>
+					<p><b>{comment.user}</b></p>
+					<p>{comment.text}</p>
+				</li>
+			)
+		}
+		else 
+			return <li>Никто еще не оставил комментриии!</li>
+	}
 }
 
 /*

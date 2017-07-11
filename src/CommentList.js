@@ -10,6 +10,14 @@ class CommentList extends Component {
         comments: []
     }
 
+    componentWillMount() {
+        console.log('---', 'mounting', this.props.comments.length)
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log('---', this.state.isOpen, 'next ', nextState.isOpen)
+    }
+
     render() {
         const { isOpen } = this.state
         return (
@@ -18,6 +26,18 @@ class CommentList extends Component {
                 {this.getBody()}
             </div>
         )
+    }
+
+    componentDidMount() {
+        console.log('---', 'mounted')
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('---', 'prev', prevState.isOpen)
+    }
+
+    componentWillUnmount() {
+        console.log('---', 'unmounting')
     }
 
     getBody() {

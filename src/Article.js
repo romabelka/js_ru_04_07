@@ -8,14 +8,15 @@ class Article extends Component {
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
-        }).isRequired
+        }).isRequired,
+        defaultOpen: PropTypes.bool
     }
 
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: false
+            isOpen: props.defaultOpen
         }
     }
 

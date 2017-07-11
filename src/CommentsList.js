@@ -33,12 +33,17 @@ class CommentsList extends Component {
     }
 
     getComments() {
-        if (!this.state.isOpen) return null;
+        if (!this.state.isOpen) {
+            return null;
+        }
 
-        const { comments } = this.props,
-            commentElements = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>);
+        const { comments } = this.props;
+        if (!comments) {
+            return <ul><li>Нет ни одного комментария.</li></ul>
+        }
 
-       return <ul>{commentElements}</ul>
+        const commentElements = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>);
+        return <ul>{commentElements}</ul>
     }
 }
 

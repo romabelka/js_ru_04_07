@@ -25,7 +25,7 @@ class Article extends Component {
 
         return <div>
             <p>{this.props.article.text}</p>
-            {this.getComments(this.props.article.comments)}
+            {this.getComments()}
         </div>
 
     }
@@ -38,12 +38,7 @@ class Article extends Component {
     }
 
     getComments() {
-
-        if (this.props.article.comments) {
-            return <CommentsList comments={this.props.article.comments}/>
-        }
-
-        return null
+        return <CommentsList comments={this.props.article.comments} />
     }
 }
 

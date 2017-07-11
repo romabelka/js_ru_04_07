@@ -11,14 +11,18 @@ class CommentsList extends Component {
     }
 
     render() {
-        return (
-            <div>
-                {this.getButton()}
-                <ol>
-                    {this.getBody()}
-                </ol>
-            </div>
-        )
+        if (this.props.comments) {
+            return (
+                <div>
+                    {this.getButton()}
+                    <ol>
+                        {this.getBody()}
+                    </ol>
+                </div>
+            )
+        } else {
+            return null
+        }
     }
 
     getButton() {

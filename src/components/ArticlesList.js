@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Article from './Article'
 import PropTypes from 'prop-types'
-import toggleOpenArticle from '../decorators/accordeon'
+import accordion from '../decorators/accordion'
 
 function ArticlesList(props) {
     const {articles, state, toggleOpenArticle} = props
@@ -26,4 +26,4 @@ ArticlesList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default toggleOpenArticle(ArticlesList)
+export default accordion(ArticlesList)

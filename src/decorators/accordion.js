@@ -5,9 +5,17 @@ export default (OriginalComponet) => class DecoratedComponent extends React.Comp
         openArticleId: null
     }
 
-    toggleOpenArticle = openArticleId => () => this.setState({openArticleId})
+    toggleOpenArticle = openArticleId => () => {
+        if (this.state.openArticleId === openArticleId) {
+            this.setState({
+                openArticleId: null
+            })
+        } else {
+            this.setState({openArticleId})
+        }
+    }
 
     render() {
-        return <OriginalComponet {...this.props} state={this.state} toggleOpenArticle = {this.toggleOpenArticle}/>
+        return <OriginalComponet {...this.props} state={this.state} toggleOpenArticle={this.toggleOpenArticle}/>
     }
 }

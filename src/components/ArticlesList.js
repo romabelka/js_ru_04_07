@@ -23,7 +23,9 @@ function ArticlesList(props) {
 }
 
 ArticlesList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.array.isRequired,
+    state: PropTypes.object.isRequired,
+    toggleOpenArticle: PropTypes.func.isRequired
 }
 
 export default accordion(ArticlesList)

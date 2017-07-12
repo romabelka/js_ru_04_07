@@ -5,11 +5,13 @@ import PropTypes from 'prop-types'
 class Article extends Component {
     static propTypes = {
         article: PropTypes.shape({
+            id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
         }).isRequired,
-        defaultOpen: PropTypes.bool
+        isOpen: PropTypes.bool.isRequired,
+        toggleOpen: PropTypes.func.isRequired
     }
 
     render() {

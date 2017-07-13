@@ -3,17 +3,19 @@ import CommentList from './CommentList'
 import PropTypes from 'prop-types'
 
 class Article extends Component {
+
     static propTypes = {
         article: PropTypes.shape({
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
         }).isRequired,
-        defaultOpen: PropTypes.bool
-    }
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func
+    };
 
     render() {
-        const { article, toggleOpen } = this.props
+        const { article, toggleOpen } = this.props;
         return (
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>
@@ -23,8 +25,8 @@ class Article extends Component {
     }
 
     getBody() {
-        const { article, isOpen } = this.props
-        if (!isOpen) return null
+        const { article, isOpen } = this.props;
+        if (!isOpen) return null;
         return (
             <div>
                <p>{article.text}</p>

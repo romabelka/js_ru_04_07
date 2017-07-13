@@ -7,7 +7,6 @@ class Article extends Component {
 
     this.state = {
       isOpen: false,
-      isComments: false
     }
 
   }
@@ -17,47 +16,26 @@ class Article extends Component {
           <div>
             <h3 onClick = {this.handleClick}>{ article.title }</h3>
             { this.getBody() }
-
           </div>
     )
   }
 
   getBody(){
 
-    if (!this.state.isOpen) return null
+    if (!this.state.isOpen) return null;
 
     return (
       <div>
         <p>{ this.props.article.text }</p>
-        <a href="#" onClick = {this.checkedStateComments}>{ this.getTextBtn() }</a>
-        { this.getCommentsList() }
+        <CommnetsList comments = {this.props.article.comments}/>
       </div>
     )
-  }
-
-  getCommentsList(){
-    if (!this.state.isComments) return false
-
-    return <CommnetsList comments={this.props.article.comments} />
-  }
-
-  getTextBtn(){
-    if (!this.state.isComments) return 'Open'
-
-    return 'Close'
   }
 
   handleClick = (ev) => {
     ev.preventDefault();
     this.setState({
       isOpen: !this.state.isOpen
-    })
-  }
-
-  checkedStateComments = (ev) => {
-    ev.preventDefault();
-    this.setState({
-      isComments: !this.state.isComments
     })
   }
 }

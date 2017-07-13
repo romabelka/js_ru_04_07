@@ -1,5 +1,6 @@
 import React  from 'react'
 import Comment from './Comment'
+import PropTypes from 'prop-types'
 import toggleOpen from '../decorators/toggleOpen'
 
 function CommentList(props) {

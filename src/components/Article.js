@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import CommentList from './CommentList'
+import React, {Component} from 'react';
+import CommentList from './CommentList';
 
 class Article extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             isOpen: false
@@ -11,20 +11,25 @@ class Article extends Component {
     }
 
     render() {
-        const { article } = this.props
+        const { article } = this.props;
+
         return (
             <div>
                 <h3 onClick = {this.handleClick}>{article.title}</h3>
                 { this.getBody() }
-                { this.getComments() }
             </div>
         )
     }
 
     getBody() {
-        if (!this.state.isOpen) return null
+        if (!this.state.isOpen) return null;
 
-        return <p>{this.props.article.text}</p>
+        return (
+            <div>
+                <p>{this.props.article.text}</p>
+                { this.getComments() }
+            </div>
+        )
     }
 
     getComments() {
@@ -32,23 +37,11 @@ class Article extends Component {
     }
 
     handleClick = (ev) => {
-        ev.preventDefault()
+        ev.preventDefault();
         this.setState({
             isOpen: !this.state.isOpen
         })
     }
 }
 
-/*
-function Article(props) {
-    const { article } = props
-    return (
-        <div>
-            <h3>{article.title}</h3>
-            <p>{article.text}</p>
-        </div>
-    )
-}
-*/
-
-export default Article
+export default Article;

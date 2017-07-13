@@ -34,4 +34,12 @@ class Article extends Component {
     }
 }
 
+Article.propTypes = {
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    comments: PropTypes.array
+  }),
+  isOpen: PropTypes.bool.isRequired
+}
 export default Article

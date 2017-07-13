@@ -1,8 +1,13 @@
 import React  from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import PropTypes from 'prop-types'
 
-function CommentList(props) {
+function CommentList(props) { 
+    let  propTypes = {
+              comments: PropTypes.array     
+    }
+
     const { isOpen, toggleOpen } = props
     return (
         <div>

@@ -4,13 +4,12 @@ import PropTypes from 'prop-types'
 import Accordion from '../decorators/accordion'
 
 function ArticlesList(props) {
-    const {articles, openId, toggleOpen} = props,
-        articleElements = articles.map(article => (
+    const articleElements = props.articles.map(article => (
             <li key={article.id}>
                 <Article
                     article={article}
-                    isOpen={article.id === openId}
-                    toggleOpen={toggleOpen(article.id)}
+                    isOpen={article.id === props.openId}
+                    toggleOpen={props.toggleOpen(article.id)}
                 />
             </li>
         ));
@@ -23,7 +22,9 @@ function ArticlesList(props) {
 }
 
 ArticlesList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.array.isRequired,
+    openId: PropTypes.string,
+    toggleOpen: PropTypes.func.isRequired
 };
 
 export default Accordion(ArticlesList)

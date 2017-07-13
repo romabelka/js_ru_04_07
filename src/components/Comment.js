@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Comment({comment}) {
     return (
@@ -7,5 +8,8 @@ function Comment({comment}) {
         </div>
     )
 }
+Comment.PropTypes = {
+       comment: PropTypes.bool.isRequired
+    };
 
 export default Comment

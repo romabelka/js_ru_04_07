@@ -9,22 +9,22 @@ class Article extends Component {
             text: PropTypes.string,
             comments: PropTypes.array
         }).isRequired,
-        defaultOpen: PropTypes.bool
-    }
+        accordion: PropTypes.bool
+    };
 
     render() {
-        const { article, toggleOpen } = this.props
+        const { article, accordion } = this.props;
         return (
             <div>
-                <h3 onClick = {toggleOpen}>{article.title}</h3>
+                <h3 onClick = {accordion}>{article.title}</h3>
                 {this.getBody()}
             </div>
         )
     }
 
     getBody() {
-        const { article, isOpen } = this.props
-        if (!isOpen) return null
+        const { article, isOpen } = this.props;
+        if (!isOpen) return null;
         return (
             <div>
                <p>{article.text}</p>

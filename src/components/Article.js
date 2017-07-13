@@ -13,18 +13,18 @@ class Article extends Component {
     }
 
     render() {
-        const { article, toggleOpen } = this.props
+        const { article, accordeon } = this.props;
         return (
             <div>
-                <h3 onClick = {toggleOpen}>{article.title}</h3>
+                <h3 onClick = {accordeon}>{article.title}</h3>
                 {this.getBody()}
             </div>
         )
     }
 
     getBody() {
-        const { article, isOpen } = this.props
-        if (!isOpen) return null
+        const { article, isOpen } = this.props;
+        if (!isOpen) return null;
         return (
             <div>
                <p>{article.text}</p>

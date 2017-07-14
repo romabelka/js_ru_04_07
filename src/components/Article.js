@@ -9,7 +9,9 @@ class Article extends Component {
       text: PropTypes.string,
       comments: PropTypes.array
     }).isRequired,
-    defaultOpen: PropTypes.bool
+    defaultOpen: PropTypes.bool,
+    isOpen: PropTypes.string,
+    toggleOpen: PropTypes.func
   };
 
   render() {

@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default (OriginalComponent) => class DecoratedComponent extends React.Component {
-  static propTypes = {
-    isOpen: PropTypes.bool
-  };
   state = {
       isOpen: false
   };

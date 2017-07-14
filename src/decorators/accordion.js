@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default (OriginalComponent) => class DecoratedComponent extends Component {
-  static propTypes = {
-    openElementId: PropTypes.number
-  };
+export default (OriginalComponent) => class Accordion extends Component {
 
   constructor(props) {
     super(props);

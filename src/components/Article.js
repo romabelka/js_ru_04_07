@@ -8,13 +8,13 @@ const Article = (props) => {
     return (
         <div>
             <h3 onClick = {toggleOpenArticle}>{article.title}</h3>
-            <Body {...props}/>
+            { getBody({...props}) }
         </div>
     )
 
 };
 
-const Body = ({ article, isOpenArticle }) => {
+function getBody({ article, isOpenArticle }) {
     if (!isOpenArticle) return null;
 
     return (
@@ -23,7 +23,7 @@ const Body = ({ article, isOpenArticle }) => {
             <CommentList comments = {article.comments}/>
         </div>
     )
-};
+}
 
 
 Article.propTypes = {

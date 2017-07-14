@@ -8,12 +8,12 @@ const CommentList = (props) => {
     return (
         <div>
             <button onClick = {toggleOpen}>{isOpen ? 'hide' : 'show'} comments</button>
-            <Body {...props}/>
+            { getBody({...props}) }
         </div>
     )
 };
 
-const Body = ({ comments, isOpen }) => {
+function getBody({ comments, isOpen }) {
     if (!isOpen) return null;
     if (!comments.length) return <i>No comments yet</i>;
     return (
@@ -21,7 +21,7 @@ const Body = ({ comments, isOpen }) => {
             {comments.map(comment => <li key = {comment.id}><Comment {...comment} /></li>)}
         </ul>
     )
-};
+}
 
 CommentList.defaultProps = {
     comments: []

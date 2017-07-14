@@ -1,15 +1,15 @@
 import React from 'react'
 import Article from './Article'
 import PropTypes from 'prop-types'
-import toggleOpenArticle from '../decorators/toggleOpenArticle'
+import toggleOpenItem from '../decorators/toggleOpenItem'
 
-const ArticlesList = ({articles, openArticleId, toggleOpenArticle}) => {
+const ArticlesList = ({articles, openItemId, toggleOpenItem}) => {
     const articleElements = articles.map(article => (
         <li key = {article.id}>
             <Article
                 article = {article}
-                isOpenArticle = {article.id === openArticleId}
-                toggleOpenArticle = {toggleOpenArticle(article.id)}
+                isOpenArticle = {article.id === openItemId}
+                toggleOpenArticle = {toggleOpenItem(article.id)}
             />
         </li>
     ));
@@ -22,8 +22,8 @@ ArticlesList.defaultProps = {
 };
 ArticlesList.propTypes = {
     articles: PropTypes.array.isRequired,
-    openArticleId: PropTypes.string,
-    toggleOpenArticle: PropTypes.func.isRequired
+    openItemId: PropTypes.string,
+    toggleOpenItem: PropTypes.func.isRequired
 };
 
-export default toggleOpenArticle(ArticlesList)
+export default toggleOpenItem(ArticlesList)

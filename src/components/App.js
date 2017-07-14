@@ -13,14 +13,14 @@ class App extends Component {
 
     state = {
         selected: null
-    }
+    };
 
     render() {
-        const {articles} = this.props
+        const {articles} = this.props;
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
-        }))
+        }));
         return (
             <div>
                 <UserForm />

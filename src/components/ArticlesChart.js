@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class ArticlesChart extends Component {
-    static propTypes = {
-
-    };
-
     componentWillReceiveProps(nextProps) {
         //change chart with d3
     }
@@ -18,6 +14,10 @@ class ArticlesChart extends Component {
         this.container = container
         //do some logic with d3 on container
     }
+}
+
+ArticlesChart.propTypes = {
+
 }
 
 export default ArticlesChart

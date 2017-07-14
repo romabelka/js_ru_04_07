@@ -1,6 +1,8 @@
 import React, {Component, PureComponent} from 'react'
-import CommentList from './CommentList'
+import CommentList from '../CommentList'
+import CSSTransitionGroup from 'react-addons-css-transition-group'
 import PropTypes from 'prop-types'
+import './style.css'
 
 class Article extends Component {
     static propTypes = {
@@ -13,12 +15,12 @@ class Article extends Component {
         toggleOpen: PropTypes.func
     }
 
-/*
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.isOpen !== this.props.isOpen
-    }
+    /*
+     shouldComponentUpdate(nextProps, nextState) {
+     return nextProps.isOpen !== this.props.isOpen
+     }
 
-*/
+     */
     render() {
         const { article, toggleOpen } = this.props
         console.log('---', 'rendering Article')
@@ -26,7 +28,13 @@ class Article extends Component {
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>
                 <button onClick = {this.deleteComment}>Delete Comment</button>
-                {this.getBody()}
+                <CSSTransitionGroup
+                    transitionName = "article"
+                    transitionEnterTimeout = {500}
+                    transitionLeaveTimeout = {300}
+                >
+                    {this.getBody()}
+                </CSSTransitionGroup>
             </div>
         )
     }
@@ -42,8 +50,8 @@ class Article extends Component {
         if (!isOpen) return null
         return (
             <div>
-               <p>{article.text}</p>
-                <CommentList comments = {article.comments}/>
+                <p>{article.text}</p>
+                <CommentList comments = {article.comments} />
             </div>
         )
     }

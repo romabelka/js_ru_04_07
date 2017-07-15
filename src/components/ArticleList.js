@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import accordion from '../decorators/accordion'
 
 class ArticlesList extends Component {
-    articleRefs = []
+    articleRefs = [];
 
     render() {
         const {articles, toggleOpenItem, openItemId} = this.props

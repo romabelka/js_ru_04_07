@@ -83,13 +83,12 @@ class CommentForm extends Component {
   handleClear = ev => {
     ev.preventDefault();
     const form = ev.target.closest('form');
-    const {removeErrors} = this.props;
 
     this.setState({
       username: '',
       text: ''
     });
-    removeErrors(form);
+    this.props.removeErrors(form);
   };
 
   /**
@@ -99,9 +98,8 @@ class CommentForm extends Component {
   handleChange = ev => {
     const elem = ev.target.id;
     const form = ev.target.closest('form');
-    const {removeErrors} = this.props;
 
-    removeErrors(form, ev.target.name);
+    this.props.removeErrors(form, ev.target.name);
     this.setState({
       [elem]: ev.target.value
     });

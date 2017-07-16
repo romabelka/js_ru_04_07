@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "start": "webpack-dev-server --hot --inline  --host 0.0.0.0 --public 192.168.50.61:8080 --watch-poll",
     "build": "webpack"
   },
   "repository": {
@@ -33,6 +33,7 @@
   "dependencies": {
     "react": "^15.5.0",
     "react-addons-css-transition-group": "^15.6.0",
+    "react-day-picker": "^6.1.0",
     "react-dom": "^15.5.0",
     "react-select": "^1.0.0-rc.5"
   }

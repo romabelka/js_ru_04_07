@@ -6,7 +6,6 @@ import Name from './Fields/Name';
 import CommentText from './Fields/Comment';
 
 function CommentList(props) {
-    console.log('CommentList = ', props);
     const { isOpen, toggleOpen } = props
     return (
         <div>

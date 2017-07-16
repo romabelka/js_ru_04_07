@@ -18,7 +18,6 @@ class App extends Component {
     }
 
     render() {
-        console.log('App props = ', this.props);
         const {articles} = this.props
         const options = articles.map(article => ({
             label: article.title,

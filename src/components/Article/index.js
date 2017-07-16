@@ -22,6 +22,7 @@ class Article extends Component {
 
      */
     render() {
+        console.log('Article props = ', this.props);
         const { article, toggleOpen } = this.props
         console.log('---', 'rendering Article')
         return (

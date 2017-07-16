@@ -6,6 +6,8 @@ import UserForm from './UserForm'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
+import Calendar from './Calendar';
+
 class App extends Component {
     static propTypes = {
 
@@ -16,6 +18,7 @@ class App extends Component {
     }
 
     render() {
+        console.log('App props = ', this.props);
         const {articles} = this.props
         const options = articles.map(article => ({
             label: article.title,
@@ -27,6 +30,7 @@ class App extends Component {
                 <Select options = {options} onChange = {this.handleSelect} value = {this.state.selected} multi />
                 <ArticleList articles = {articles}/>
                 <ArticlesChart articles = {articles}/>
+                <Calendar/>
             </div>
         )
     }

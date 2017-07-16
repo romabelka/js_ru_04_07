@@ -8,6 +8,7 @@ class ArticlesList extends Component {
     articleRefs = []
 
     render() {
+        console.log('xxxxxx = ', this.props);
         const {articles, toggleOpenItem, openItemId} = this.props
         const articleElements = articles.map(article => (
             <li key = {article.id}>

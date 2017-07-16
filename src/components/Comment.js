@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 function Comment({comment}) {
     return (
         <div>
-            {comment.text} <b>by {comment.user}</b>
+            {comment.text} <b>by {comment.user}</b>            
         </div>
     )
 }

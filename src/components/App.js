@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
+import Calendar from './Calendar/index'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
@@ -23,6 +24,7 @@ class App extends Component {
         }))
         return (
             <div>
+                <Calendar />
                 <UserForm />
                 <Select options = {options} onChange = {this.handleSelect} value = {this.state.selected} multi />
                 <ArticleList articles = {articles}/>

@@ -1,0 +1,23 @@
+.username-valid {
+
+}
+
+.username-invalid {
+    border-color: red;
+}
+
+.username-invalid:focus{
+    outline-color: red;
+}
+
+.comment-valid {
+
+}
+
+.comment-invalid {
+    border-color: red;
+}
+
+.comment-invalid:focus{
+    outline-color: red;
+}

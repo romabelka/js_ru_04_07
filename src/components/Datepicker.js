@@ -6,13 +6,10 @@ import 'react-day-picker/lib/style.css';
 
 
 class Datepicker extends Component {
-    static propTypes = {
-
-    };
 
     state = {
         currentDate: new Date()
-    }
+    };
 
     handleDayClick = day => {
         this.setState({
@@ -24,7 +21,7 @@ class Datepicker extends Component {
         return (
             <div>
                 <DayPicker onDayClick={this.handleDayClick} selectedDays={this.state.currentDate}/>
-                <div> Выбранная дата: {this.state.currentDate.toLocaleDateString()}</div>
+                <div>Выбранная дата: {this.state.currentDate.toLocaleDateString()}</div>
             </div>
         )
     }

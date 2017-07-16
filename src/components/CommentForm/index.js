@@ -10,9 +10,9 @@ class CommentForm extends React.Component {
     };
 
     handleChange = (event) => {
-        let state = {};
-        state[event.target.name] = event.target.value;
-        this.setState(state)
+        this.setState({
+            [event.target.name]:event.target.value
+        })
     };
 
     handleFormSubmit = (event) => {
@@ -26,8 +26,6 @@ class CommentForm extends React.Component {
                 })
             }
         })
-
-
     };
 
     validateForm(){
@@ -41,9 +39,7 @@ class CommentForm extends React.Component {
                 resolve();
             })
         })
-
     }
-
 
     render(){
         return (
@@ -54,11 +50,8 @@ class CommentForm extends React.Component {
                 <div><textarea className={!this.state.textIsValid ? 'invalid' : '' } onChange={this.handleChange} name = 'text' type = "text" value={this.state.text}/></div>
                 <div><button type="submit">Отправить</button></div>
             </form>
-
-
         )
     }
-
 }
 
 export default CommentForm

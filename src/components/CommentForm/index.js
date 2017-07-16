@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class CommentForm extends Component {
+    static propTypes = {
+        usernameLength: PropTypes.array,
+        commentLength: PropTypes.array
+    }
+
+    static defaultProps = {
+        usernameLength: [10,30],
+        commentLength: [30,150]
+    }
 
     state = {
         username: '',
         commentText: '',
-        usernameLength: [10,30],
-        commentLength: [30,150]
     }
 
     render() {
@@ -35,8 +43,8 @@ class CommentForm extends Component {
         const   elemId = ev.target.id,
                 elemLength = ev.target.value.length
 
-        if ((elemId === "username" && elemLength > this.state.usernameLength[1]) ||
-            (elemId === "commentText" && elemLength > this.state.commentLength[1])) {
+        if ((elemId === "username" && elemLength > this.props.usernameLength[1]) ||
+            (elemId === "commentText" && elemLength > this.props.commentLength[1])) {
             return
         }
 
@@ -56,9 +64,9 @@ class CommentForm extends Component {
     validation = (elemId, elemLength) => {
         let borderColor = "initial"
         if (elemId === "username") {
-            elemLength < this.state.usernameLength[0] ? borderColor = 'red' : borderColor = 'initial'
+            elemLength < this.props.usernameLength[0] ? borderColor = 'red' : borderColor = 'initial'
         } else if (elemId === "commentText") {
-            elemLength < this.state.commentLength[0] ? borderColor = 'red' : borderColor = 'initial'
+            elemLength < this.props.commentLength[0] ? borderColor = 'red' : borderColor = 'initial'
         }
         return borderColor
     }

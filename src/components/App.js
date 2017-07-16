@@ -5,6 +5,7 @@ import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import Datepicker from './Datepicker'
 
 class App extends Component {
     static propTypes = {
@@ -23,6 +24,8 @@ class App extends Component {
         }))
         return (
             <div>
+                <Datepicker/>
+                <br/>
                 <UserForm />
                 <Select options = {options} onChange = {this.handleSelect} value = {this.state.selected} multi />
                 <ArticleList articles = {articles}/>

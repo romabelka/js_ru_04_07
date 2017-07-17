@@ -1,5 +1,6 @@
 import React, {Component, PureComponent} from 'react'
 import CommentList from '../CommentList'
+import CommentForm from '../CommentForm'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import PropTypes from 'prop-types'
 import './style.css'
@@ -35,6 +36,7 @@ class Article extends Component {
                 >
                     {this.getBody()}
                 </CSSTransitionGroup>
+                <CommentForm />
             </div>
         )
     }

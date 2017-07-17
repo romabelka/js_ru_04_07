@@ -1,0 +1,7 @@
+.error {
+    border-color: red;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}

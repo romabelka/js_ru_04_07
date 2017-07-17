@@ -28,7 +28,7 @@ class ArticlesList extends Component {
 
     setContainerRef = (container) => {
         this.container = container
-        console.log('---', container)
+        //console.log('---', container)
     }
 
     setArticleRef = (articleRef) => {
@@ -36,9 +36,9 @@ class ArticlesList extends Component {
     }
 
     componentDidMount() {
-        console.log('---', this.articleRefs)
-        console.log('---', 'own node: ', findDOMNode(this))
-        console.log('---', 'nodes: ', this.articleRefs.map(findDOMNode))
+        //console.log('---', this.articleRefs)
+        //console.log('---', 'own node: ', findDOMNode(this))
+        //console.log('---', 'nodes: ', this.articleRefs.map(findDOMNode))
     }
 }
 

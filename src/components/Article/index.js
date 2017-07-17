@@ -15,15 +15,9 @@ class Article extends Component {
         toggleOpen: PropTypes.func
     }
 
-    /*
-     shouldComponentUpdate(nextProps, nextState) {
-     return nextProps.isOpen !== this.props.isOpen
-     }
-
-     */
     render() {
         const { article, toggleOpen } = this.props
-        console.log('---', 'rendering Article')
+        //console.log('---', 'rendering Article')
         return (
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>

@@ -2,6 +2,7 @@ import React  from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import PropTypes from 'prop-types'
+import CommentForm from './CommentForm/'
 
 function CommentList(props) {
     const { isOpen, toggleOpen } = props
@@ -19,6 +20,8 @@ function getBody({ comments, isOpen }) {
     return (
         <ul>
             {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
+			<h3>Add comment:</h3>
+			<CommentForm />
         </ul>
     )
 }

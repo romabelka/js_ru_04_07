@@ -4,6 +4,7 @@ import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
 import Filters from './Filters'
+import Counter from './Counter'
 
 class App extends Component {
     static propTypes = {
@@ -14,6 +15,7 @@ class App extends Component {
         const {articles} = this.props
         return (
             <div>
+                <Counter />
                 <UserForm />
                 <Filters articles = {articles} />
                 <ArticleList articles = {articles} />

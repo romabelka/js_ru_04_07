@@ -7,33 +7,56 @@ class UserForm extends Component {
     };
 
     state = {
-        username: 'Roma'
+        username: '',
+        text: ''
+    }
+
+    validator = {
+        username: {
+            min: 10,
+            max: 30
+        },
+        text: {
+            min: 30,
+            max: 150
+        }
     }
 
     render() {
+        const {username, text} = this.state
         return (
             <div>
-                username: <input type = "text" value = {this.state.username} onChange = {this.handleChange} />
+                <p>
+                    <label>username:</label>
+                    <input type = "text" name = "username" value = {username} onChange = {this.handleChange} />
+                </p>
+                <p>
+                    <label>text:</label>
+                    <textarea name = "text" value = {text} onChange = {this.handleChange} cols = "30" rows = "5" />
+                </p>
             </div>
         )
     }
 
     handleChange = ev => {
-        if (ev.target.value.length > 15) {
+        const {name, value} = ev.target
+        const validLength = this.validator[name]
+
+        console.log(validLength + ' => ' + value.length)
+
+        if (value.length > validLength.min) {
+            ev.target.style.borderColor = "red"
+
             return this.setState({
-                username: ''
+                [name]: value.substr(0, validLength.max)
             })
         }
 
-        this.setState({
-            username: ev.target.value
-        })
+        ev.target.style.borderColor = ""
 
-/*
-        this.setState({
-            username: ''
+        return this.setState({
+            [name]: value
         })
-*/
     }
 }
 

@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
-import validation from '../../decorators/validation';
 
 class CommentForm extends Component {
   static propTypes = {
-    validate: PropTypes.func.isRequired,
-    minMaxSymbols: PropTypes.func.isRequired,
-    removeErrors: PropTypes.func.isRequired
+
   };
 
   constructor(props) {
@@ -20,35 +17,35 @@ class CommentForm extends Component {
 
   render() {
     return (
-      <form className="form">
+      <form className="form" onSubmit={this.handleSubmit}>
         <div className="form__elem">
           <h3 className="form__title">Add comments</h3>
         </div>
         <div className="form__elem">
           <label className="form__label" htmlFor="username">username:</label>
-          <input className="form__input"
+          <input className={"form__input " + this.isValid('username')}
                  placeholder="from 10 to 30 symbols"
                  id="username"
                  name="username"
                  type="text"
                  value={this.state.username}
-                 onChange={this.handleChange}/>
+                 onChange={this.handleChange('username')}/>
         </div>
         <div className="form__elem">
           <label className="form__label" htmlFor="text">text:</label>
-          <textarea className="form__textarea"
-                    placeholder="from 30 to 150 symbols"
+          <textarea placeholder="from 30 to 150 symbols"
                     id="text"
                     name="text"
                     type="text"
                     value={this.state.text}
-                    onChange={this.handleChange}>
+                    onChange={this.handleChange('text')}
+                    className = {"form__textarea " + this.isValid('text')}>
         </textarea>
         </div>
         <div className="form__elem">
           <div className="buttons">
             <button className="buttons__clear" type="clear" onClick={this.handleClear}>Clear</button>
-            <button className="buttons__submit" type="submit" onClick={this.handleSubmit}>Add</button>
+            <button className="buttons__submit" type="submit">Add</button>
           </div>
         </div>
 
@@ -57,18 +54,36 @@ class CommentForm extends Component {
   }
 
   /**
+   * Valid enter Data
+   * @param type {string}
+   */
+  isValid = type => this.validate(type)  ? '' : 'error';
+
+  /**
+   * Validation
+   * @param type {string}
+   */
+  validate (type) {
+    if (this.state[type].length){
+      console.log(type, limits[type].min < this.state[type].length == this.state[type].length < limits[type].max);
+      return limits[type].min < this.state[type].length == this.state[type].length < limits[type].max;
+    } else {
+      return false
+    }
+  };
+
+  /**
    * Submit Form Handler
    * @param ev {Event}
    */
   handleSubmit = ev => {
     ev.preventDefault();
-    const form = ev.target.closest('form');
-    const {validate, minMaxSymbols} = this.props;
-
-    if(validate(form, minMaxSymbols)) {
+    console.log('result: username', this.validate('username'));
+    console.log('result: text', this.validate('text'));
+    if (this.validate('username') && this.validate('text')) {
       const result = {
-        username: form.elements.username.value,
-        text: form.elements.text.value
+        username: this.state.username,
+        text: this.state.text
       };
       console.log(result);
     } else {
@@ -82,28 +97,37 @@ class CommentForm extends Component {
    */
   handleClear = ev => {
     ev.preventDefault();
-    const form = ev.target.closest('form');
-
     this.setState({
       username: '',
       text: ''
     });
-    this.props.removeErrors(form);
   };
 
   /**
    * Change Data in Input Handler
-   * @param ev {Event}
+   * @param type {string}
    */
-  handleChange = ev => {
-    const elem = ev.target.id;
-    const form = ev.target.closest('form');
-
-    this.props.removeErrors(form, ev.target.name);
+  handleChange = type => ev => {
+    const {value} = ev.target;
     this.setState({
-      [elem]: ev.target.value
+      [type]: value
     });
   };
 }
 
-export default validation(CommentForm)
+/**
+ * Limits data for validation
+ * @type {{username: {min: number, max: number}, text: {min: number, max: number}}}
+ */
+const limits = {
+  username: {
+    min: 10,
+    max: 30
+  },
+  text: {
+    min: 30,
+    max: 150
+  }
+};
+
+export default CommentForm

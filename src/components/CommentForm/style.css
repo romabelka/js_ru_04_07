@@ -19,7 +19,7 @@
 
 .form__input, .form__textarea {
     flex: 3;
-    border-width: 1px;
+    border: 1px solid grey;
 }
 
 .form__textarea {
@@ -37,4 +37,13 @@
 
 .buttons__submit {
     margin-left: 10px;
+}
+.error {
+    border-color: red;
+}
+.form__input:focus.error {
+    outline: none;
+}
+.form__textarea:focus.error {
+    outline: none;
 }

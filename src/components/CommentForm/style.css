@@ -38,12 +38,12 @@
 .buttons__submit {
     margin-left: 10px;
 }
-.error {
-    border-color: red;
-}
+
 .form__input:focus.error {
     outline: none;
+    border-color: red;
 }
 .form__textarea:focus.error {
     outline: none;
+    border-color: red;
 }

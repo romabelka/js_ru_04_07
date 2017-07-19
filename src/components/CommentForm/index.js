@@ -57,7 +57,7 @@ class CommentForm extends Component {
    * Valid enter Data
    * @param type {string}
    */
-  isValid = type => this.validate(type)  ? '' : 'error';
+  isValid = type => this.validate(type) ? '' : 'error';
 
   /**
    * Validation
@@ -65,7 +65,6 @@ class CommentForm extends Component {
    */
   validate (type) {
     if (this.state[type].length){
-      console.log(type, limits[type].min < this.state[type].length == this.state[type].length < limits[type].max);
       return limits[type].min < this.state[type].length == this.state[type].length < limits[type].max;
     } else {
       return false
@@ -78,8 +77,6 @@ class CommentForm extends Component {
    */
   handleSubmit = ev => {
     ev.preventDefault();
-    console.log('result: username', this.validate('username'));
-    console.log('result: text', this.validate('text'));
     if (this.validate('username') && this.validate('text')) {
       const result = {
         username: this.state.username,

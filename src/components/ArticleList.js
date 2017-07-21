@@ -3,12 +3,14 @@ import {findDOMNode} from 'react-dom'
 import Article from './Article'
 import PropTypes from 'prop-types'
 import accordion from '../decorators/accordion'
+import {connect} from 'react-redux'
+import {deleteArticle} from '../AC'
 
 class ArticlesList extends Component {
     articleRefs = []
 
     render() {
-        const {articles, toggleOpenItem, openItemId} = this.props
+        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
         const articleElements = articles.map(article => (
             <li key = {article.id}>
                 <Article
@@ -16,6 +18,7 @@ class ArticlesList extends Component {
                     article = {article}
                     isOpen = {article.id === openItemId}
                     toggleOpen = {toggleOpenItem(article.id)}
+                    handleDelete = {deleteArticle}
                 />
             </li>
         ))
@@ -43,10 +46,15 @@ class ArticlesList extends Component {
 }
 
 ArticlesList.propTypes = {
+    //from connect
+    deleteArticle: PropTypes.func.isRequired,
     articles: PropTypes.array.isRequired,
     //from accordion decorator
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired
 }
 
-export default accordion(ArticlesList)
+export default connect(
+    ({ articles }) => ({ articles }),
+    { deleteArticle }
+)(accordion(ArticlesList))

@@ -7,11 +7,61 @@ import {connect} from 'react-redux'
 import {deleteArticle} from '../AC'
 
 class ArticlesList extends Component {
-    articleRefs = []
+    articleRefs = [];
+
+    filterSelect(articles, selectsArticle) {
+        let filteringArticles = [];
+
+        if (Array.isArray(selectsArticle) && Array.isArray(articles)) {
+            articles.forEach( article => {
+                for (let i = 0, length = selectsArticle.length; i < length; i++ ) {
+                    const id = selectsArticle[i].value;
+
+                    if (id === article.id) {
+                        filteringArticles.push(article);
+
+                        break;
+                    }
+                }
+            });
+
+            return filteringArticles;
+        }
+
+        return articles;
+    }
+
+    filterDate(articles, datesArticles) {
+        const { from, to } = datesArticles;
+        let result = [];
+
+        if (!(from && to) || !Array.isArray(articles)) return articles;
+
+        const fromM = new Date(datesArticles.from).getTime();
+        const toM = new Date(datesArticles.to).getTime();
+
+        articles.forEach( article => {
+            const dateArticleM = new Date(article.date).getTime();
+
+            if (dateArticleM >= fromM && dateArticleM <= toM) {
+                result.push(article);
+            }
+        })
+
+        return result;
+    }
 
     render() {
-        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
-        const articleElements = articles.map(article => (
+        const {articles, filters, deleteArticle, toggleOpenItem, openItemId} = this.props;
+        const { select, dateRange } = filters;
+        let filteringArticles = [];
+        let result = [];
+
+        filteringArticles = this.filterSelect(articles, select);
+
+        result = this.filterDate(filteringArticles, dateRange);
+
+        const articleElements = result.map(article => (
             <li key = {article.id}>
                 <Article
                     ref = {this.setArticleRef}
@@ -22,6 +72,7 @@ class ArticlesList extends Component {
                 />
             </li>
         ))
+
         return (
             <ul ref = {this.setContainerRef} >
                 {articleElements}
@@ -54,7 +105,14 @@ ArticlesList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired
 }
 
+const mapStateToProps = state => {
+    return {
+        articles: state.articles,
+        filters: state.filters
+    }
+}
+
 export default connect(
-    ({ articles }) => ({ articles }),
+    mapStateToProps,
     { deleteArticle }
 )(accordion(ArticlesList))

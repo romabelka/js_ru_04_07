@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ArticleList from './ArticleList'
 import UserForm from './UserForm'
-import Filters from './Filters'
 import Counter from './Counter'
 
 class App extends Component {
@@ -15,7 +14,6 @@ class App extends Component {
             <div>
                 <Counter />
                 <UserForm />
-                <Filters />
                 <ArticleList />
             </div>
         )

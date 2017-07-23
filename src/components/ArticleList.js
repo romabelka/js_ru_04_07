@@ -1,16 +1,21 @@
 import React, {Component} from 'react'
 import {findDOMNode} from 'react-dom'
 import Article from './Article'
+import Filters from './Filters'
+
 import PropTypes from 'prop-types'
 import accordion from '../decorators/accordion'
 import {connect} from 'react-redux'
-import {deleteArticle} from '../AC'
+import {FILTER_APRIL, FILTER_MAY, FILTER_JUNE, FILTER_ALL} from '../constants';
+
+import {deleteArticle, filterApril, filterMay, filterJune, filterAll, filterData, setFilter} from '../AC'
 
 class ArticlesList extends Component {
     articleRefs = []
 
     render() {
-        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
+        const {articles, deleteArticle, toggleOpenItem, openItemId, filters} = this.props;
+
         const articleElements = articles.map(article => (
             <li key = {article.id}>
                 <Article
@@ -22,11 +27,47 @@ class ArticlesList extends Component {
                 />
             </li>
         ))
+
         return (
-            <ul ref = {this.setContainerRef} >
-                {articleElements}
-            </ul>
+            <div>
+                <h3>Фильтры</h3>
+                <Filters value={filters}
+                         handleChangeSelect={this.handleChangeSelect}
+                         handleChangeDate={this.handleChangeDate}/>
+                <ul ref = {this.setContainerRef} >
+                    {articleElements}
+                </ul>
+            </div>
+
         )
+    }
+
+
+    setArticleList = (filterValue) => {
+        const { filterApril, filterMay, filterJune, filterAll, filterData } = this.props;
+        switch (filterValue) {
+            case FILTER_ALL:
+                return filterAll();
+            case FILTER_APRIL:
+                return filterApril();
+            case FILTER_MAY:
+                return filterMay();
+            case FILTER_JUNE:
+                return filterJune();
+            case FILTER_DATA:
+                return filterData();
+        }
+    }
+
+    handleChangeSelect = (selectedValue) => {
+        const { setFilter } = this.props;
+        setFilter(selectedValue.value);
+        this.setArticleList(selectedValue.value);
+    }
+
+    handleChangeDate = (value) => {
+        const { filterData } = this.props;
+        filterData(value.from, value.to);
     }
 
     setContainerRef = (container) => {
@@ -48,6 +89,11 @@ class ArticlesList extends Component {
 ArticlesList.propTypes = {
     //from connect
     deleteArticle: PropTypes.func.isRequired,
+    filterApril: PropTypes.func.isRequired,
+    filterMay: PropTypes.func.isRequired,
+    filterJune: PropTypes.func.isRequired,
+    filterAll: PropTypes.func.isRequired,
+    filterData: PropTypes.func.isRequired,
     articles: PropTypes.array.isRequired,
     //from accordion decorator
     openItemId: PropTypes.string,
@@ -55,6 +101,6 @@ ArticlesList.propTypes = {
 }
 
 export default connect(
-    ({ articles }) => ({ articles }),
-    { deleteArticle }
+    ({ articles, filters }) => ({ articles, filters }),
+    { deleteArticle, filterAll, filterApril, filterMay, filterJune, filterData, setFilter }
 )(accordion(ArticlesList))

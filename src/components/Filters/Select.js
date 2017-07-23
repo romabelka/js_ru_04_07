@@ -9,14 +9,7 @@ class SelectFilter extends Component {
         setFilter: PropTypes.func
     };
 
-    // state = {
-    //     selected: null
-    // }
-
     handleChange = selected => {
-        // console.log('SET select filter = ', selected);
-        // this.setState({ selected });
-
         this.props.setFilter( selected );
     }
 

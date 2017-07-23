@@ -10,23 +10,16 @@ class DateRange extends Component {
         curValue: PropTypes.object
     }
 
-    // state = {
-    //     from: null,
-    //     to: null
-    // }
-
     handleDayClick = (day) => {
-        const resultDate = DateUtils.addDayToRange(day, this.state);
-
-        // this.setState(resultDate);
+        const resultDate = DateUtils.addDayToRange(day, this.props.curValue);
 
         this.props.setFilter(resultDate)
     }
 
     render() {
-        // const { from, to } = this.state
         const { from, to } = this.props.curValue;
-        const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
+        const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`;
+
         return (
             <div className="date-range">
                 <DayPicker

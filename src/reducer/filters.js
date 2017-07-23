@@ -4,14 +4,12 @@ import {
 } from '../constants';
 
 const initState = {
-    dateRange: '',
+    dateRange: { from: null, to: null },
     select: ''
 };
 
 export default (state = initState, action) => {
     const {type, payload} = action;
-    // console.log('reducer filter = ', action);
-    // console.log('reducer filter {} = ', { ...state, select: payload });
 
     switch (type) {
 

@@ -10,8 +10,12 @@ class Filters extends Component {
     render() {
         return (
             <div>
-                <SelectFilter articles = {[]} />
-                <DateRange />
+                <SelectFilter
+                    articles = {[]}
+                    value={this.props.value}
+                    handleChange={this.props.handleChangeSelect}/>
+                <DateRange
+                    handleChange={this.props.handleChangeDate}/>
             </div>
         )
     }

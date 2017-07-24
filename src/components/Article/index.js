@@ -1,8 +1,11 @@
+/**
+ * Created by oem on 7/23/17.
+ */
 import React, {Component, PureComponent} from 'react';
-import CommnetsList from './CommnetsList';
+import CommnetsList from '../CommnetsList';
 import PropTypes from 'prop-types';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import './Article/article.css'
+import './style.css'
 
 class Article extends Component {
     static propTypes = {
@@ -52,7 +55,7 @@ class Article extends Component {
         return (
             <div>
                 <p>{ article.text }</p>
-                <CommnetsList comments={article.comments} key = {article.comments.length}/>
+                <CommnetsList comments={article.comments}/>
             </div>
         )
     }

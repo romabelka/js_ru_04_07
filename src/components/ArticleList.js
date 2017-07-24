@@ -54,7 +54,34 @@ ArticlesList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired
 }
 
+const mapStateToProps = (state) => {
+    const { filters }           = state
+    const { selected, period }  = filters
+    const selectedIds           = selected ? selected.map(selected => selected.value) : []
+    const fromTimestamp         = period.from ? Date.parse(period.from) : null
+    const toTimestamp           = period.to ? Date.parse(period.to) : null
+    const articles              = state.articles.filter(article => {
+        const articleTimestamp = Date.parse(article.date)  
+        if (selectedIds.length > 0 && (fromTimestamp && toTimestamp)) {
+            return selectedIds.includes(article.id) && (articleTimestamp > fromTimestamp && articleTimestamp < toTimestamp)
+        }
+        
+        if (selectedIds.length > 0) {
+            return selectedIds.includes(article.id)
+        }
+
+        if (fromTimestamp && toTimestamp) {
+            return (articleTimestamp > fromTimestamp && articleTimestamp < toTimestamp)
+        }
+        
+        return true;
+    })
+    return {
+        articles
+    }
+}
+
 export default connect(
-    ({ articles }) => ({ articles }),
+    mapStateToProps,
     { deleteArticle }
 )(accordion(ArticlesList))

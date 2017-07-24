@@ -13,7 +13,7 @@ class Article extends Component {
         }).isRequired,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func,
-        handleDelete: PropTypes.func.isRequired
+        handleDelete: PropTypes.func
     }
 
     /*
@@ -28,6 +28,7 @@ class Article extends Component {
         return (
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>
+				<p>{article.date}</p>
                 <button onClick = {this.deleteArticle}>Delete Article</button>
                 <CSSTransitionGroup
                     transitionName = "article"

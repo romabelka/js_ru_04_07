@@ -4,6 +4,9 @@ import ArticleList from './ArticleList'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
+import Mycounter from './Mycounter'
+import Myelement from './Myelement'
+import 'react-select/dist/react-select.css'
 
 class App extends Component {
     static propTypes = {
@@ -14,8 +17,10 @@ class App extends Component {
         return (
             <div>
                 <Counter />
+                <Myelement />
+                <Mycounter />
                 <UserForm />
-                <Filters />
+                <Filters articles = {[]} />
                 <ArticleList />
             </div>
         )

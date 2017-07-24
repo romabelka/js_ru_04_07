@@ -1,5 +1,6 @@
 import React  from 'react'
 import Comment from './Comment'
+import CommentForm from './CommentForm'
 import toggleOpen from '../decorators/toggleOpen'
 import PropTypes from 'prop-types'
 
@@ -15,11 +16,17 @@ function CommentList(props) {
 
 function getBody({ comments, isOpen }) {
     if (!isOpen) return null
-    if (!comments.length) return <h3>No comments yet</h3>
-    return (
+    const body = comments.length ? (
         <ul>
             {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
         </ul>
+    ) : <h3>No comments yet</h3>
+
+    return (
+        <div>
+            {body}
+            <CommentForm />
+        </div>
     )
 }
 

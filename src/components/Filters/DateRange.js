@@ -5,12 +5,11 @@ import 'react-day-picker/lib/style.css';
 
 class DateRange extends Component {
 
-    handleDayClick = (day) => {
-        this.setState(DateUtils.addDayToRange(day, this.state))
-    }
+    handleDayClick = (day) => this.props.filterDate(DateUtils.addDayToRange(day, this.props.dateRange))
+
 
     render() {
-        const { from, to } = this.props
+        const { from, to } = this.props.dateRange
         const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
         return (
             <div className="date-range">

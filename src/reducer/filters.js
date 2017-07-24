@@ -15,6 +15,11 @@ export default (state = init, action) => {
                 ...state,
                 filteredArticles: payload.filteredArticles
             }
+        case 'FILTER_DATE':
+            return {
+                ...state,
+                dateRange: payload.date
+            }
     }
     return state
 }

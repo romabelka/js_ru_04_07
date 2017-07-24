@@ -10,18 +10,28 @@ class ArticlesList extends Component {
     articleRefs = []
 
     filterArticlesById(articles, filteredArticles) {
-        if (Array.isArray(filteredArticles) && filteredArticles.length) {
             return articles.filter((article) => !filteredArticles.includes(article.id))
-        }
+    }
 
+    filterArticlesByDate(articles, dateRange) {
+        if (dateRange.from && dateRange.to){
+            return articles.filter((article) => {
+                let date = new Date(article.date)
+                let from = new Date(dateRange.from)
+                let to = new Date(dateRange.to)
+                return (date >= from) && (date <= to)
+            })
+        }
         return articles
     }
 
     render() {
         const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
-        const {filteredArticles} = this.props.filters
+        const {filteredArticles, dateRange} = this.props.filters
 
         let articlesToShow = this.filterArticlesById(articles, filteredArticles.map(a => a.value))
+
+        articlesToShow = this.filterArticlesByDate(articlesToShow, dateRange)
 
         const articleElements = articlesToShow.map(article => (
             <li key={article.id}>

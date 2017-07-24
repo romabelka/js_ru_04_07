@@ -1,19 +1,20 @@
-
-
-const init  = {
+const init = {
     dateRange: {
         from: null,
         to: null
     },
-    selectedArticles: []
+    filteredArticles: []
 }
 
 export default (state = init, action) => {
     const {type, payload} = action
 
     switch (type) {
-        case 'CASE':
-            return state
+        case 'FILTER_ARTICLE':
+            return {
+                ...state,
+                filteredArticles: payload.filteredArticles
+            }
     }
     return state
 }

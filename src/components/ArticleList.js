@@ -9,21 +9,33 @@ import {deleteArticle} from '../AC'
 class ArticlesList extends Component {
     articleRefs = []
 
+    filterArticlesById(articles, filteredArticles) {
+        if (Array.isArray(filteredArticles) && filteredArticles.length) {
+            return articles.filter((article) => !filteredArticles.includes(article.id))
+        }
+
+        return articles
+    }
+
     render() {
         const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
-        const articleElements = articles.map(article => (
-            <li key = {article.id}>
+        const {filteredArticles} = this.props.filters
+
+        let articlesToShow = this.filterArticlesById(articles, filteredArticles.map(a => a.value))
+
+        const articleElements = articlesToShow.map(article => (
+            <li key={article.id}>
                 <Article
-                    ref = {this.setArticleRef}
-                    article = {article}
-                    isOpen = {article.id === openItemId}
-                    toggleOpen = {toggleOpenItem(article.id)}
-                    handleDelete = {deleteArticle}
+                    ref={this.setArticleRef}
+                    article={article}
+                    isOpen={article.id === openItemId}
+                    toggleOpen={toggleOpenItem(article.id)}
+                    handleDelete={deleteArticle}
                 />
             </li>
         ))
         return (
-            <ul ref = {this.setContainerRef} >
+            <ul ref={this.setContainerRef}>
                 {articleElements}
             </ul>
         )
@@ -55,6 +67,6 @@ ArticlesList.propTypes = {
 }
 
 export default connect(
-    ({ articles }) => ({ articles }),
-    { deleteArticle }
+    ({articles, filters}) => ({articles, filters}),
+    {deleteArticle},
 )(accordion(ArticlesList))

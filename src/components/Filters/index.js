@@ -3,15 +3,23 @@ import PropTypes from 'prop-types'
 import DateRange from './DateRange'
 import SelectFilter from './Select'
 import {connect} from 'react-redux'
+import {filterArticles} from '../../AC'
 
 class Filters extends Component {
-    static propTypes = {};
+    static propTypes = {
+        articles: PropTypes.array.isRequired,
+        dateRange: PropTypes.object.isRequired,
+        filteredArticles: PropTypes.array,
+        filterArticles: PropTypes.func
+    };
 
     render() {
-        const {articles, dateRange, selectedArticles} = this.props
+        const {articles, dateRange, filteredArticles, filterArticles} = this.props
         return (
             <div>
-                <SelectFilter articles={articles} selectedArticles = {selectedArticles}/>
+                <SelectFilter articles={articles}
+                              filteredArticles={filteredArticles}
+                              filterArticles={filterArticles}/>
                 <DateRange dateRange={dateRange}/>
             </div>
         )
@@ -22,6 +30,7 @@ class Filters extends Component {
 export default connect((state) => ({
         articles: state.articles,
         dateRange: state.filters.dateRange,
-        selectedArticles: state.filters.selectedArticles
-    })
+        filteredArticles: state.filters.filteredArticles
+    }),
+    {filterArticles}
 )(Filters)

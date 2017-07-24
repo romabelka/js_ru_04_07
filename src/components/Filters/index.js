@@ -8,13 +8,14 @@ class Filters extends Component {
     };
 
     render() {
+        const {articles} = this.props;
         return (
             <div>
-                <SelectFilter articles = {[]} />
+                <SelectFilter />
                 <DateRange />
             </div>
         )
     }
 }
 
-export default Filters
+export default Filters;

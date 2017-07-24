@@ -10,7 +10,7 @@ class ArticlesList extends Component {
     articleRefs = []
 
     render() {
-        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
+        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props;
         const articleElements = articles.map(article => (
             <li key = {article.id}>
                 <Article
@@ -21,7 +21,7 @@ class ArticlesList extends Component {
                     handleDelete = {deleteArticle}
                 />
             </li>
-        ))
+        ));
         return (
             <ul ref = {this.setContainerRef} >
                 {articleElements}
@@ -31,18 +31,12 @@ class ArticlesList extends Component {
 
     setContainerRef = (container) => {
         this.container = container
-        console.log('---', container)
-    }
+    };
 
     setArticleRef = (articleRef) => {
         this.articleRefs.push(articleRef)
     }
 
-    componentDidMount() {
-        console.log('---', this.articleRefs)
-        console.log('---', 'own node: ', findDOMNode(this))
-        console.log('---', 'nodes: ', this.articleRefs.map(findDOMNode))
-    }
 }
 
 ArticlesList.propTypes = {

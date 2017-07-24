@@ -14,21 +14,15 @@ class Article extends Component {
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func,
         handleDelete: PropTypes.func.isRequired
-    }
+    };
 
-    /*
-     shouldComponentUpdate(nextProps, nextState) {
-     return nextProps.isOpen !== this.props.isOpen
-     }
-
-     */
     render() {
         const { article, toggleOpen } = this.props
-        console.log('---', 'rendering Article')
         return (
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>
                 <button onClick = {this.deleteArticle}>Delete Article</button>
+                <p>{article.date}</p>
                 <CSSTransitionGroup
                     transitionName = "article"
                     transitionEnterTimeout = {500}
@@ -41,13 +35,13 @@ class Article extends Component {
     }
 
     deleteArticle = () => {
-        const {handleDelete, article} = this.props
+        const {handleDelete, article} = this.props;
         handleDelete(article.id)
-    }
+    };
 
     getBody() {
         const { article, isOpen } = this.props
-        if (!isOpen) return null
+        if (!isOpen) return null;
         return (
             <div>
                 <p>{article.text}</p>

@@ -10,9 +10,13 @@ class ArticlesList extends Component {
     articleRefs = []
 
     render() {
-        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
-        const articleElements = articles.map(article => (
-            <li key = {article.id}>
+        const {articles, deleteArticle, toggleOpenItem, openItemId, visibleIds, dateRangeFilter} = this.props
+        const articleElements = articles.map(article => {
+            const articleTime = Number(new Date(article.date))
+            const needHide = visibleIds.length && !visibleIds.includes(article.id) ||
+                dateRangeFilter && (articleTime < dateRangeFilter.from || articleTime > dateRangeFilter.to)
+
+            return <li key = {article.id} style={{display: needHide ? 'none' : null}}>
                 <Article
                     ref = {this.setArticleRef}
                     article = {article}
@@ -21,7 +25,8 @@ class ArticlesList extends Component {
                     handleDelete = {deleteArticle}
                 />
             </li>
-        ))
+        })
+
         return (
             <ul ref = {this.setContainerRef} >
                 {articleElements}
@@ -49,12 +54,19 @@ ArticlesList.propTypes = {
     //from connect
     deleteArticle: PropTypes.func.isRequired,
     articles: PropTypes.array.isRequired,
+    visibleIds: PropTypes.array,
+    dateRangeFilter: PropTypes.object,
+
     //from accordion decorator
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired
 }
 
 export default connect(
-    ({ articles }) => ({ articles }),
+    state => ({
+        articles: state.articles,
+        visibleIds: state.filters.ids,
+        dateRangeFilter: state.filters.range
+    }),
     { deleteArticle }
 )(accordion(ArticlesList))

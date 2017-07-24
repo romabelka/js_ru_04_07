@@ -1,20 +1,27 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import DateRange from './DateRange'
 import SelectFilter from './Select'
+import {connect} from 'react-redux'
 
 class Filters extends Component {
-    static propTypes = {
-    };
+    static propTypes = {};
 
     render() {
+        const {articles, dateRange, selectedArticles} = this.props
         return (
             <div>
-                <SelectFilter articles = {[]} />
-                <DateRange />
+                <SelectFilter articles={articles} selectedArticles = {selectedArticles}/>
+                <DateRange dateRange={dateRange}/>
             </div>
         )
     }
 }
 
-export default Filters
+
+export default connect((state) => ({
+        articles: state.articles,
+        dateRange: state.filters.dateRange,
+        selectedArticles: state.filters.selectedArticles
+    })
+)(Filters)

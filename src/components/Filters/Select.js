@@ -29,8 +29,6 @@ class SelectFilter extends Component {
 
     changeSelect = (value) => {
         const {setSelectValue} = this.props;
-        console.clear();
-        console.log(this.props);
         setSelectValue(value);
     }
 }

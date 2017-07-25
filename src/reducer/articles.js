@@ -21,7 +21,7 @@ export default (articleState = articles, action) => {
                 }
                 else if (!dateRange.from && dateRange.to)
                 {
-                    return articleDate >= dateRange.to
+                    return articleDate <= dateRange.to
                 }
                 else
                 {

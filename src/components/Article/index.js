@@ -24,7 +24,6 @@ class Article extends Component {
      */
     render() {
         const { article, toggleOpen } = this.props
-        console.log('---', 'rendering Article')
         return (
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>

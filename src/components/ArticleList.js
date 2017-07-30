@@ -16,6 +16,7 @@ class ArticlesList extends Component {
         const articleElements = articles.map(article => (
             <li key = {article.id}>
                 <Article
+                    id = {article.id}
                     ref = {this.setArticleRef}
                     article = {article}
                     isOpen = {article.id === openItemId}

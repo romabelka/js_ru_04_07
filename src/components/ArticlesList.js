@@ -6,13 +6,13 @@ import accordionOpen from '../decorators/accordionOpen'
 class ArticlesList extends Component {
 
     render() {
-        const {articles, openArticleId, toggleOpenArticle} = this.props
+        const {articles, openArticleId, toggleOpen} = this.props
         const articleElements = articles.map(article => (
             <li key = {article.id}>
                 <Article
                     article = {article}
                     isOpen = {article.id === openArticleId}
-                    toggleOpen = {toggleOpenArticle(article.id)}
+                    toggleOpen = {toggleOpen(article.id)}
                 />
             </li>
         ))
@@ -27,7 +27,9 @@ class ArticlesList extends Component {
 }
 
 ArticlesList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.array.isRequired,
+    openArticleId: PropTypes.string,
+    toggleOpen: PropTypes.func
 }
 
 export default accordionOpen(ArticlesList)

@@ -2,14 +2,13 @@ import { ADD_COMMENT, ADD_COMMENT_TO_ARTICLE } from '../constants'
 
 
 export default store => next => action => {
-    let actionModifed = action
     if (action.type === ADD_COMMENT) {
-      actionModifed.payload.comment['id'] = makeid()
-      const articleId = actionModifed.payload.comment.articleId
-      const commentId = actionModifed.payload.comment.id
+      action.payload.comment['id'] = makeid()
+      const articleId = action.payload.comment.articleId
+      const commentId = action.payload.comment.id
       store.dispatch({ type: ADD_COMMENT_TO_ARTICLE, payload: { articleId: articleId, commentId: commentId } })
     }
-    next(actionModifed)
+    next(action)
 }
 
 function makeid() {

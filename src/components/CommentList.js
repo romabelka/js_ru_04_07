@@ -3,8 +3,15 @@ import Comment from './Comment'
 import CommentForm from './CommentForm'
 import toggleOpen from '../decorators/toggleOpen'
 import PropTypes from 'prop-types'
+<<<<<<< HEAD
 
-function CommentList(props) {
+function CommentList(props) { 
+    let  propTypes = {
+              comments: PropTypes.array     
+    }
+=======
+>>>>>>> upstream/master
+
     const { isOpen, toggleOpen } = props
     return (
         <div>

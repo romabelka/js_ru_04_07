@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 import {commentSelectorFactory} from '../selectors'
 
 function Comment({comment}) {
+    let propTypes = {
+              comments: PropTypes.array
+    }
     return (
         <div>
             {comment.text} <b>by {comment.user}</b>

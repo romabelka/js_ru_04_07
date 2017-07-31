@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
+import {connect} from 'react-redux'
+import {addComment} from '../../AC';
 
 class CommentForm extends Component {
     static propTypes = {
@@ -31,6 +33,13 @@ class CommentForm extends Component {
             user: '',
             text: ''
         })
+        if (this.state.user && this.state.text) {
+            this.props.addComment({user: this.state.user, text: this.state.text, articleId: this.props.articleId});
+        }
+        else {
+            console.log('jop');
+        }
+
     }
 
     getClassName = type => this.state[type].length && this.state[type].length < limits[type].min
@@ -56,4 +65,4 @@ const limits = {
     }
 }
 
-export default CommentForm
+export default connect(null, {addComment})(CommentForm)

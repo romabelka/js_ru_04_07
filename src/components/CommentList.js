@@ -14,7 +14,7 @@ function CommentList(props) {
     )
 }
 
-function getBody({ comments, isOpen }) {
+function getBody({ comments, isOpen , articleId}) {
     if (!isOpen) return null
     const body = comments.length ? (
         <ul>
@@ -25,7 +25,7 @@ function getBody({ comments, isOpen }) {
     return (
         <div>
             {body}
-            <CommentForm />
+            <CommentForm articleId = {articleId}/>
         </div>
     )
 }

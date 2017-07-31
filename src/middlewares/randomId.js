@@ -1,6 +1,9 @@
+import {ADD_COMMENT} from '../constants'
 export default store => next => action => {
-  console.log('--- random id', randWD(10))
-  console.log('--- ', action);
+  switch (action.type) {
+    case ADD_COMMENT:
+      action.payload.id = randWD(10);
+  }
   next(action)
 }
 

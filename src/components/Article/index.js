@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import './style.css'
 import {connect} from 'react-redux'
 import {commentsSelectorFactory} from '../../selectors'
+import {addComment} from '../../AC'
 
 class Article extends Component {
     static propTypes = {
@@ -55,7 +56,7 @@ class Article extends Component {
         return (
             <div>
                 <p>{article.text}</p>
-                <CommentList comments = {comments} />
+                <CommentList articleId = {article.id} comments = {comments} />
             </div>
         )
     }
@@ -71,4 +72,4 @@ const createMapStateToProps = () => {
   })
 }
 
-export default connect(createMapStateToProps)(Article)
+export default connect(createMapStateToProps, { addComment })(Article)

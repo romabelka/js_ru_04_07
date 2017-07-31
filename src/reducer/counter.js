@@ -1,4 +1,4 @@
-import {INCREMENT} from '../constants'
+import {INCREMENT, ADD_COMMENT} from '../constants'
 
 export default (counterState = 0, action) => {
     switch (action.type) {

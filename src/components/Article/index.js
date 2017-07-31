@@ -3,13 +3,19 @@ import CommentList from '../CommentList'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import PropTypes from 'prop-types'
 import './style.css'
+import {connect} from 'react-redux'
+import {commentsSelectorFactory} from '../../selectors'
+import {addComment} from '../../AC'
 
 class Article extends Component {
     static propTypes = {
+        //connect
+        comments: PropTypes.array,
+        // own props
         article: PropTypes.shape({
+            id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
+            text: PropTypes.string
         }).isRequired,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func,
@@ -45,15 +51,25 @@ class Article extends Component {
     }
 
     getBody() {
-        const { article, isOpen } = this.props
+        const { article, isOpen, comments } = this.props
         if (!isOpen) return null
         return (
             <div>
                 <p>{article.text}</p>
-                <CommentList comments = {article.comments} />
+                <CommentList articleId = {article.id} comments = {comments} />
             </div>
         )
     }
 }
 
-export default Article
+
+
+const createMapStateToProps = () => {
+  const commentsSelector = commentsSelectorFactory()
+
+  return (state, ownProps) => ({
+    comments: commentsSelector(state, ownProps)
+  })
+}
+
+export default connect(createMapStateToProps, { addComment })(Article)

@@ -7,8 +7,9 @@ export default (articleState = arrToMap(defaultArticles), action) => {
 
     switch (type) {
         case DELETE_ARTICLE:
-            //todo fix me
-            return articleState.filter(article => article.id !== payload.id)
+            const tempState = {...articleState}
+            delete tempState[payload.id]
+            return tempState
     }
     return articleState
 }

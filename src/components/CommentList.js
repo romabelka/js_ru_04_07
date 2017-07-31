@@ -14,7 +14,7 @@ function CommentList(props) {
     )
 }
 
-function getBody({ comments, isOpen }) {
+function getBody({ articleId, comments, isOpen }) {
     if (!isOpen) return null
     const body = comments.length ? (
         <ul>
@@ -25,9 +25,13 @@ function getBody({ comments, isOpen }) {
     return (
         <div>
             {body}
-            <CommentForm />
+            <CommentForm articleId = {articleId} />
         </div>
     )
+}
+
+CommentList.propTypes = {
+    articleId: PropTypes.string.isRequired
 }
 
 CommentList.defaultProps = {

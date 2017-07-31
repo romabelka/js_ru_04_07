@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
+import {connect} from 'react-redux'
+import {addComment} from '../../AC'
 
 class CommentForm extends Component {
     static propTypes = {
+        // ownProps
+        articleId: PropTypes.string.isRequired,
+        // storeProps
+        addComment: PropTypes.func.isRequired
     };
 
     state = {
@@ -26,11 +32,19 @@ class CommentForm extends Component {
     }
 
     handleSubmit = ev => {
-        ev.preventDefault()
-        this.setState({
-            user: '',
-            text: ''
-        })
+        ev.preventDefault();
+        const { user, text } = this.state;
+        const { articleId, addComment } = this.props;
+        if (
+            ( user.length > limits.user.min && user.length < limits.user.max ) &&
+            ( text.length > limits.text.min && text.length < limits.text.max )
+        ) {
+            addComment({user, text}, articleId);
+            this.setState({
+                user: '',
+                text: ''
+            })
+        }
     }
 
     getClassName = type => this.state[type].length && this.state[type].length < limits[type].min
@@ -56,4 +70,4 @@ const limits = {
     }
 }
 
-export default CommentForm
+export default connect(null, { addComment })(CommentForm)

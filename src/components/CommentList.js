@@ -1,6 +1,8 @@
 import React  from 'react'
 import Comment from './Comment'
+import CommentForm from './CommentForm'
 import toggleOpen from '../decorators/toggleOpen'
+import PropTypes from 'prop-types'
 
 function CommentList(props) {
     const { isOpen, toggleOpen } = props
@@ -12,18 +14,26 @@ function CommentList(props) {
     )
 }
 
-function getBody({ comments, isOpen }) {
+function getBody({ article: {comments, id}, isOpen }) {
     if (!isOpen) return null
-    if (!comments.length) return <h3>No comments yet</h3>
-    return (
+    const body = comments.length ? (
         <ul>
-            {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
+            {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
         </ul>
+    ) : <h3>No comments yet</h3>
+
+    return (
+        <div>
+            {body}
+            <CommentForm articleId = {id} />
+        </div>
     )
 }
 
 CommentList.defaultProps = {
-    comments: []
+    article: PropTypes.object.isRequired,
+    toggleOpen: PropTypes.func,
+    isOpen: PropTypes.bool
 }
 
 export default toggleOpen(CommentList)

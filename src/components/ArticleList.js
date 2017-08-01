@@ -6,13 +6,15 @@ import accordion from '../decorators/accordion'
 import {connect} from 'react-redux'
 import {deleteArticle, loadAllArticles} from '../AC'
 import {filteredArticlesSelector} from '../selectors'
+import Loader from './Loader'
 
 class ArticlesList extends Component {
     articleRefs = []
 
     render() {
-        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
-        console.log('---', 'rerendering ArticleList')
+        const {articles, deleteArticle, toggleOpenItem, openItemId, loading} = this.props
+        if (loading) return <Loader />
+
         const articleElements = articles.map(article => (
             <li key = {article.id}>
                 <Article
@@ -50,6 +52,7 @@ ArticlesList.propTypes = {
     deleteArticle: PropTypes.func.isRequired,
     loadAllArticles: PropTypes.func.isRequired,
     articles: PropTypes.array.isRequired,
+    loading: PropTypes.bool,
     //from accordion decorator
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired
@@ -57,7 +60,8 @@ ArticlesList.propTypes = {
 
 export default connect(
     (state) => ({
-        articles: filteredArticlesSelector(state)
+        articles: filteredArticlesSelector(state),
+        loading: state.articles.loading
     }),
     { deleteArticle, loadAllArticles }
 )(accordion(ArticlesList))

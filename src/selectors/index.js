@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect'
 import {mapToArr} from '../helpers'
 
-export const articlesObjSelector = (state) => state.articles
+export const articlesObjSelector = (state) => state.articles.entities
 export const commentsSelector = (state) => state.comments
 export const filtersSelector = (state) => state.filters
 export const idSelector = (state, props) => props.id

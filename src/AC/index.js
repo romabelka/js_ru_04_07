@@ -1,5 +1,5 @@
 import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT,
-    LOAD_ALL_ARTICLES} from '../constants'
+    LOAD_ALL_ARTICLES, LOAD_ARTICLE} from '../constants'
 
 export function increment() {
     return {
@@ -40,5 +40,13 @@ export function loadAllArticles() {
     return {
         type: LOAD_ALL_ARTICLES,
         callAPI: '/api/article'
+    }
+}
+
+export function loadArticle(id) {
+    return {
+        type: LOAD_ARTICLE,
+        payload: { id },
+        callAPI: `/api/article/${id}`
     }
 }

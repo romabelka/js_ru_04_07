@@ -4,15 +4,17 @@ import Article from './Article'
 import PropTypes from 'prop-types'
 import accordion from '../decorators/accordion'
 import {connect} from 'react-redux'
-import {deleteArticle} from '../AC'
+import {deleteArticle, loadAllArticles} from '../AC'
 import {filteredArticlesSelector} from '../selectors'
+import Loader from './Loader'
 
 class ArticlesList extends Component {
     articleRefs = []
 
     render() {
-        const {articles, deleteArticle, toggleOpenItem, openItemId} = this.props
-        console.log('---', 'rerendering ArticleList')
+        const {articles, deleteArticle, toggleOpenItem, openItemId, loading} = this.props
+        if (loading) return <Loader />
+
         const articleElements = articles.map(article => (
             <li key = {article.id}>
                 <Article
@@ -41,16 +43,16 @@ class ArticlesList extends Component {
     }
 
     componentDidMount() {
-        console.log('---', this.articleRefs)
-        console.log('---', 'own node: ', findDOMNode(this))
-        console.log('---', 'nodes: ', this.articleRefs.map(findDOMNode))
+        this.props.loadAllArticles()
     }
 }
 
 ArticlesList.propTypes = {
     //from connect
     deleteArticle: PropTypes.func.isRequired,
+    loadAllArticles: PropTypes.func.isRequired,
     articles: PropTypes.array.isRequired,
+    loading: PropTypes.bool,
     //from accordion decorator
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired
@@ -58,7 +60,8 @@ ArticlesList.propTypes = {
 
 export default connect(
     (state) => ({
-        articles: filteredArticlesSelector(state)
+        articles: filteredArticlesSelector(state),
+        loading: state.articles.loading
     }),
-    { deleteArticle }
+    { deleteArticle, loadAllArticles }
 )(accordion(ArticlesList))

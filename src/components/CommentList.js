@@ -14,7 +14,7 @@ function CommentList(props) {
     )
 }
 
-function getBody({ comments, isOpen }) {
+function getBody({ article: {comments, id}, isOpen }) {
     if (!isOpen) return null
     const body = comments.length ? (
         <ul>
@@ -25,13 +25,13 @@ function getBody({ comments, isOpen }) {
     return (
         <div>
             {body}
-            <CommentForm />
+            <CommentForm articleId = {id} />
         </div>
     )
 }
 
 CommentList.defaultProps = {
-    comments: [],
+    article: PropTypes.object.isRequired,
     toggleOpen: PropTypes.func,
     isOpen: PropTypes.bool
 }

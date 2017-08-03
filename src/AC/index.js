@@ -1,5 +1,5 @@
 import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT,
-    LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL} from '../constants'
+    LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, LOAD_COMMENTS} from '../constants'
 
 export function increment() {
     return {
@@ -43,6 +43,39 @@ export function loadAllArticles() {
     }
 }
 
+export function loadComments(id) {
+
+    return {
+        type: LOAD_COMMENTS,
+        payload: { id },
+        callAPI: '/api/comment?article=' + id
+    }
+
+    // Не смог реазилвать 3й пункт ДЗ
+    /*return (dispatch, getState) => {
+
+        const { articles, comments } = getState()
+        const articleComments = articles.entities.get(id).comments
+
+        if (comments.loading) return
+
+        dispatch({
+            type: LOAD_COMMENTS + START,
+            payload: { id }
+        })
+
+        setTimeout(() => {
+            fetch(`/api/comment?article=${id}`)
+                .then(response => response.json())
+                .then(response => dispatch({
+                    type: LOAD_COMMENTS + SUCCESS,
+                    payload: { id },
+                    response
+                }))
+        }, 1000)
+    }*/
+}
+
 /*
 export function loadArticle(id) {
     return {
@@ -62,7 +95,7 @@ export function loadArticle(id) {
             payload: { id }
         })
 
-        setTimeout(() => {
+        //setTimeout(() => {
             fetch(`/api/article/${id}`)
                 .then(res => res.json())
                 .then(response => dispatch({
@@ -70,6 +103,6 @@ export function loadArticle(id) {
                     payload: { id },
                     response
                 }))
-        }, 1000)
+        //}, 1000)
     }
 }

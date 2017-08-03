@@ -5,11 +5,8 @@ import randomId from '../middlewares/randomId'
 import api from '../middlewares/api'
 import thunk from 'redux-thunk'
 
-const enhancer = applyMiddleware(thunk, randomId, api, logger)
+const enhancer = applyMiddleware(thunk, randomId, api)
 
 const store = createStore(reducer, {}, enhancer)
-
-//dev only
-window.store = store
 
 export default store

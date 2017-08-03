@@ -4,9 +4,16 @@ import {connect} from 'react-redux'
 import {commentSelectorFactory} from '../selectors'
 
 function Comment({comment}) {
+    console.log('*** Comment, comment = ', comment);
+    const content = comment && comment.toJS();
+
+    if (!content) {
+        return null
+    }
+
     return (
         <div>
-            {comment.text} <b>by {comment.user}</b>
+            {content.text} <b>by {content.user}</b>
         </div>
     )
 }

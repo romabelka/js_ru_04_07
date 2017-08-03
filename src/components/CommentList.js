@@ -1,33 +1,50 @@
-import React  from 'react'
+import React, {Component} from 'react'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
 import toggleOpen from '../decorators/toggleOpen'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {loadComments} from '../AC'
+import Loader from './Loader'
 
-function CommentList(props) {
-    const { isOpen, toggleOpen } = props
-    return (
-        <div>
-            <button onClick = {toggleOpen}>{isOpen ? 'hide' : 'show'} comments</button>
-            {getBody(props)}
-        </div>
-    )
-}
+class CommentList extends Component {
 
-function getBody({ article: {comments, id}, isOpen }) {
-    if (!isOpen) return null
-    const body = comments.length ? (
-        <ul>
-            {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
-        </ul>
-    ) : <h3>No comments yet</h3>
+    render (){
+        const { isOpen, toggleOpen } = this.props
+        return (
+            <div>
+                <button onClick = {toggleOpen}>{isOpen ? 'hide' : 'show'} comments</button>
+                {this.getBody()}
+            </div>
+        )
+    }
 
-    return (
-        <div>
-            {body}
-            <CommentForm articleId = {id} />
-        </div>
-    )
+    componentWillReceiveProps({isOpen, article, loadComments}) {
+        if (!this.props.isOpen && isOpen) loadComments(article.id)
+    }
+
+    getBody() {
+
+        const { comments, article, isOpen } = this.props
+
+        if (!isOpen) return null
+
+        if (comments.loading || !comments.loaded) return <Loader />
+
+        const body = article.comments.length ? (
+                <ul>
+                    {article.comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
+                </ul>
+            ) : <h3>No article.comments yet</h3>
+
+        return (
+            <div>
+                {body}
+                <CommentForm articleId = {article.id} />
+            </div>
+        )
+    }
+
 }
 
 CommentList.defaultProps = {
@@ -36,4 +53,4 @@ CommentList.defaultProps = {
     isOpen: PropTypes.bool
 }
 
-export default toggleOpen(CommentList)
+export default connect(({comments}) => ({comments}), {loadComments})(toggleOpen(CommentList))

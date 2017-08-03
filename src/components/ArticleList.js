@@ -35,7 +35,6 @@ class ArticlesList extends Component {
 
     setContainerRef = (container) => {
         this.container = container
-        console.log('---', container)
     }
 
     setArticleRef = (articleRef) => {

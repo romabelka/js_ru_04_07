@@ -30,7 +30,7 @@ export default (commentState = new ReducerState, action) => {
             return commentState
                     .set('entities',arrToMap(response, CommentRecord))
                     .set('loading', false)
-                    .setIn(['loaded'], true)
+                    .set('loaded', true)
 
 
   }

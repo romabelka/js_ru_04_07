@@ -53,8 +53,6 @@ export function loadAllComments(id) {
   return (dispatch, getState) => {
     const comments = getState().comments
     const articleComments = getState().articles.entities.get(id).comments;
-    console.log('--- ', 'AD', articleComments);
-    console.log('--- ', 'AD', comments)
 
     if (comments.loading) return
     if (articleComments.every(

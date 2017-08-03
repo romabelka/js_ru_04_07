@@ -11,8 +11,7 @@ class Article extends Component {
     static propTypes = {
         article: PropTypes.shape({
             title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
+            text: PropTypes.string
         }).isRequired,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func,

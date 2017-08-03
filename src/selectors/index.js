@@ -2,11 +2,12 @@ import {createSelector} from 'reselect'
 import {mapToArr} from '../helpers'
 
 export const articlesObjSelector = (state) => state.articles.entities
-export const commentsSelector = (state) => state.comments
+export const commentsSelector = (state) => state.comments.entities
 export const filtersSelector = (state) => state.filters
 export const idSelector = (state, props) => props.id
 
 export const articlesSelector = createSelector(articlesObjSelector, mapToArr)
+
 
 export const filteredArticlesSelector = createSelector(articlesSelector, filtersSelector, (articles, filters)  => {
     console.log('---', 'recomputing filtration')

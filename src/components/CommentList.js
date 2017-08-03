@@ -26,7 +26,7 @@ class CommentList extends React.Component {
         const { article, comments, isOpen } = this.props
 
         if (!isOpen) return null
-        if (comments.loading) {
+        if (comments.loading || !comments.loaded) {
             return <div>
                 <Loader />
                 <CommentForm articleId = {article.id} />

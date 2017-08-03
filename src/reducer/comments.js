@@ -29,6 +29,7 @@ export default (comments = ReducerState(), action) => {
             return comments
                 .set('entities', arrToMap(response, commentRecord))
                 .set('loading', false)
+                .set('loaded', true)
 
     }
 

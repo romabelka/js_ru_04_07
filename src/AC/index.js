@@ -63,7 +63,7 @@ export function loadArticle(id) {
 export function loadArticle(id) {
     return (dispatch, getState) => {
         const article = getState().articles.entities.get(id)
-        if (article.text || article.loading) return
+        if (article && (article.text || article.loading)) return
 
         dispatch({
             type: LOAD_ARTICLE + START,

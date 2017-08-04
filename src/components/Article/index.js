@@ -12,16 +12,17 @@ class Article extends Component {
         id: PropTypes.string,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func,
-        handleDelete: PropTypes.func.isRequired,
+        handleDelete: PropTypes.func,
         //from connect
         article: PropTypes.shape({
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
-        }).isRequired,
+        })
     }
 
-    componentWillReceiveProps({isOpen, id, loadArticle}) {
+    componentDidMount() {
+        const {isOpen, id, loadArticle} = this.props
         if (isOpen) loadArticle(id)
     }
 
@@ -45,6 +46,7 @@ class Article extends Component {
 
     deleteArticle = () => {
         const {handleDelete, article} = this.props
+        if (!handleDelete || !article) return
         handleDelete(article.id)
     }
 
@@ -55,7 +57,7 @@ class Article extends Component {
         return (
             <div>
                 <p>{article.text}</p>
-                <CommentList article = {article} />
+                <CommentList article = {article} ref = "commentList" />
             </div>
         )
     }

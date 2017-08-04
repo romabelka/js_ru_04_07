@@ -20,7 +20,7 @@ class ArticlesPage extends Component {
     }
 
     getArticlePage = ({ match }) => {
-        return <Article id = {match.params.id} isOpen />
+        return <Article id = {match.params.id} key = {match.params.id} isOpen />
     }
 }
 

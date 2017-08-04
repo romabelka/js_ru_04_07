@@ -5,7 +5,7 @@ import NotFoundPage from './Routes/NotFound'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 
 class App extends Component {
     static propTypes = {
@@ -15,6 +15,9 @@ class App extends Component {
     render() {
         return (
             <div>
+                <Link to = "/articles">Articles</Link>
+                <Link to = "/counter">Counter</Link>
+                <Link to = "/filters">Filters</Link>
                 <UserForm />
                 <Switch>
                     <Route path = "/articles/new" render = {this.getNewArticle} exact />

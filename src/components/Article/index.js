@@ -9,22 +9,25 @@ import Loader from '../Loader'
 
 class Article extends Component {
     static propTypes = {
+        id: PropTypes.string,
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func,
+        handleDelete: PropTypes.func.isRequired,
+        //from connect
         article: PropTypes.shape({
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
         }).isRequired,
-        isOpen: PropTypes.bool,
-        toggleOpen: PropTypes.func,
-        handleDelete: PropTypes.func.isRequired
     }
 
-    componentWillReceiveProps({isOpen, article, loadArticle}) {
-        if (!this.props.isOpen && isOpen) loadArticle(article.id)
+    componentWillReceiveProps({isOpen, id, loadArticle}) {
+        if (isOpen) loadArticle(id)
     }
 
     render() {
         const { article, toggleOpen } = this.props
+        if (!article) return null
         return (
             <div>
                 <h3 onClick = {toggleOpen}>{article.title}</h3>
@@ -58,4 +61,6 @@ class Article extends Component {
     }
 }
 
-export default connect(null, { loadArticle })(Article)
+export default connect((state, {id}) => ({
+    article: state.articles.getIn(['entities', id])
+}), { loadArticle })(Article)

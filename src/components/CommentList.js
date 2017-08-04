@@ -26,14 +26,13 @@ class CommentList extends React.Component {
         const { article, comments, isOpen } = this.props
 
         if (!isOpen) return null
-        if (comments.loading || !comments.loaded) {
+        if (comments.loadingIds.has(article.id)) {
             return <div>
                 <Loader />
                 <CommentForm articleId = {article.id} />
                 </div>
         }
-
-        const body = article.comments.length ? (
+        const body = (article.comments.length && comments.entities.size) ? (
             <ul>
                 {article.comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
             </ul>

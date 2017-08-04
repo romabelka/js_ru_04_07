@@ -1,6 +1,6 @@
 import { ADD_COMMENT, LOAD_COMMENTS, SUCCESS, START} from '../constants'
 import { arrToMap } from '../helpers'
-import {Map, Record} from 'immutable'
+import {Map, Set, Record} from 'immutable'
 
 const commentRecord = new Record({
         id: null,
@@ -10,7 +10,7 @@ const commentRecord = new Record({
 
 const ReducerState = Record({
     entities: arrToMap([]),
-    loading: false,
+    loadingIds: Set(),
     loaded: false
 })
 
@@ -23,13 +23,12 @@ export default (comments = ReducerState(), action) => {
             return comments.setIn(['entities', randomId], new commentRecord(newComment))
 
         case LOAD_COMMENTS + START:
-            return comments.set('loading', true)
+            return comments.setIn(['loadingIds'], comments.loadingIds.add(payload.articleId))
 
         case LOAD_COMMENTS + SUCCESS:
-            return comments
-                .set('entities', arrToMap(response, commentRecord))
-                .set('loading', false)
-                .set('loaded', true)
+            return (comments
+                .mergeIn(['entities'], arrToMap(response, commentRecord))
+                .setIn(['loadingIds'], comments.loadingIds.remove(payload.articleId)))
 
     }
 

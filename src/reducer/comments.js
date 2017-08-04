@@ -9,9 +9,7 @@ const CommentRecord = Record({
 })
 
 const ReducerState = Record({
-    entities: new OrderedMap({}),
-    pagination: new Map({}),
-    total: null
+    entities: new OrderedMap({})
 })
 
 const defaultState = new ReducerState()

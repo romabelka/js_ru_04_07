@@ -4,6 +4,7 @@ import ArticleList from './ArticleList'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
+import { Route } from 'react-router-dom'
 
 class App extends Component {
     static propTypes = {
@@ -13,10 +14,11 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Counter />
                 <UserForm />
-                <Filters />
-                <ArticleList />
+
+                <Route path = "/articles" component = {ArticleList} />
+                <Route path = "/counter" component = {Counter} />
+                <Route path = "/filters" component = {Filters} />
             </div>
         )
     }

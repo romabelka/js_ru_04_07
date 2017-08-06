@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default (OriginalComponent) => class DecoratedComponent extends React.Component {
+export default (OriginalComponent) => class ToggleOpenDecorator extends React.Component {
     state = {
         isOpen: false
     }

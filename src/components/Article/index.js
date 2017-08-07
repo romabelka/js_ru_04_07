@@ -15,7 +15,7 @@ class Article extends Component {
             comments: PropTypes.array
         }).isRequired,
         isOpen:PropTypes.bool,
-        toggleOpen: PropTypes.func
+        toggleOpen: PropTypes.func,
     };
 
     // shouldComponentUpdate(nextProps, nextState) {
@@ -28,7 +28,7 @@ class Article extends Component {
         return (
             <div>
                 <h3 onClick={toggleOpen}>{ article.title }</h3>
-                <a href="#" onClick={this.deleteComment}>delete comments</a>
+                <a href="#" onClick={this.deleteArticle}>delete article</a>
                 <CSSTransitionGroup
                     transitionName="article"
                     transitionEnterTimeout={500}
@@ -38,12 +38,6 @@ class Article extends Component {
             </div>
         )
     }
-
-    deleteComment = () => {
-        this.props.article.comments.splice(0, 1);
-        this.setState({});
-        console.log(this.setState);
-    };
 
     setArticleRef = (articleRef) => console.log('article ref', articleRef);
 

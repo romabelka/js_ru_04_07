@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import Article from './Article/index';
 import accordion from '../decorators/accordion';
 import PropTypes from 'prop-types';
-import {findDOMNode} from 'react-dom'
+import {findDOMNode} from 'react-dom';
+import {connect} from 'react-redux';
+import {deleteArticle} from '../AC';
 
 class ArticlesList extends Component {
     articleRefs = [];
@@ -30,25 +32,23 @@ class ArticlesList extends Component {
 
     setContainerRef = (container) => {
         this.container = container;
-        console.log('container', container);
     };
 
     setArticleRef = (articleRef) => {
         this.articleRefs.push(articleRef);
-        console.log(this.articleRefs);
     };
-
-    componentDidMount() {
-        console.log('----------', this.articleRefs);
-        console.log('-----own node', findDOMNode(this));
-        console.log('--------nodes:', this.articleRefs.map(findDOMNode));
-    }
 }
 
 ArticlesList.propTypes = {
     articles: PropTypes.array.isRequired,
     openItemId: PropTypes.string,
-    toggleOpenItem: PropTypes.func.isRequired
+    toggleOpenItem: PropTypes.func.isRequired,
 };
 
-export default accordion(ArticlesList);
+const mapStateToProps = (state) => {
+    return {
+        articles: state.articles
+    }
+};
+
+export default connect(mapStateToProps)(accordion(ArticlesList));

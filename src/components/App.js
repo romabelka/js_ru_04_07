@@ -5,10 +5,10 @@ import  React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ArticlesList from './ArticlesList';
 import ArticlesChart from './ArticlesChart';
-import UserForm from './UserForm'
-import Select from 'react-select'
-import 'react-select/dist/react-select.css'
-import Filters from './Filters/index.js'
+import UserForm from './UserForm';
+import 'react-select/dist/react-select.css';
+import Filters from './Filters/index.js';
+import Counter from './Counter'
 
 class App extends Component {
     static propTypes = {};
@@ -19,18 +19,13 @@ class App extends Component {
 
     render() {
         const {articles} = this.props;
-        const options = articles.map(articles => ({
-            label: articles.title,
-            value: articles.id
-        }));
 
         return (
             <div>
-                <UserForm/>
-                <Filters articles = {articles}/>
-                <Select options={options} onChange = {this.handleSelect} value = {this.state.selected} multi/>
-                <ArticlesList articles={articles}/>
-                <ArticlesChart articles={articles}/>
+                <Counter />
+                <UserForm />
+                <Filters />
+                <ArticlesList />
             </div>
         )
     }

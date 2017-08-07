@@ -25,7 +25,7 @@ class Article extends Component {
         return (
             <div>
                 <h3 onClick={toggleOpen}>{ article.title }</h3>
-                <a href="#" onClick={this.deleteComment}>delete comments</a>
+                <a href="#" onClick={this.deleteComment}></a>
                 <CSSTransitionGroup
                     transitionName="article"
                     transitionEnterTimeout={500}

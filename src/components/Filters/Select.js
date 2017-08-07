@@ -21,10 +21,7 @@ class DateRange extends Component {
 
     render() {
         const {articles} = this.props;
-        const options = articles.map(article => ({
-            label: article.title,
-            value: article.id
-        }));
+        const options = [];
 
         return <Select
             options = {options}

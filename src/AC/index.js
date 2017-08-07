@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT,
+import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_COMMENTS_PAGE,
     LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, START, SUCCESS, FAIL} from '../constants'
 
 export function increment() {
@@ -79,5 +79,18 @@ export function loadArticle(id) {
                     response
                 }))
         }, 1000)
+    }
+}
+
+export function loadCommentsPagination(page) {
+    return (dispatch, getState) => {
+        const {comments: {pagination}} = getState()
+        if ( pagination.getIn([page, 'ids']) || pagination.getIn([page, 'loading'])) return
+
+        dispatch({
+            type: LOAD_COMMENTS_PAGE,
+            payload: { page },
+            callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
+        })
     }
 }

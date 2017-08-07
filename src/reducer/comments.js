@@ -1,6 +1,6 @@
-import {ADD_COMMENT, LOAD_ARTICLE_COMMENTS, START, SUCCESS} from '../constants'
-import {arrToMap} from '../helpers'
-import {OrderedMap, Map, Record} from 'immutable'
+import {ADD_COMMENT, LOAD_ARTICLE_COMMENTS, START, SUCCESS, LOAD_COMMENTS} from '../constants'
+import {arrToMap, idToMap, getNumberOfPages} from '../helpers'
+import {OrderedMap, Map, Record, Set} from 'immutable'
 
 const CommentRecord = Record({
     id: null,
@@ -8,8 +8,16 @@ const CommentRecord = Record({
     user: null
 })
 
+const PageRecord = Record({
+    loading: new Set(),
+    loaded: new Set(),
+    numberOfPages: 0,
+    commentsOnPage: new Map({})
+})
+
 const ReducerState = Record({
-    entities: new OrderedMap({})
+    entities: new OrderedMap({}),
+    pages: new PageRecord()
 })
 
 const defaultState = new ReducerState()
@@ -23,6 +31,20 @@ export default (commentsState = defaultState, action) => {
 
         case LOAD_ARTICLE_COMMENTS + SUCCESS:
             return commentsState.mergeIn(['entities'], arrToMap(response, CommentRecord))
+
+        case LOAD_COMMENTS + START:
+            return commentsState
+                .mergeIn(['pages', 'loading'], payload.page)
+
+        case LOAD_COMMENTS + SUCCESS:
+            return commentsState
+                .mergeIn(['pages', 'loaded'], payload.page)
+                .removeIn(['pages', 'loading'], payload.page)
+                .setIn(['pages', 'numberOfPages'], getNumberOfPages(response.total, payload.limit))
+                .mergeIn(['entities'], arrToMap(response.records, CommentRecord))
+                .mergeIn(['pages', 'commentsOnPage'], idToMap(payload.page, response.records))
+
+
     }
 
     return commentsState

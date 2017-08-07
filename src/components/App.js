@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ArticlesPage from './Routes/ArticlesPage'
 import NotFoundPage from './Routes/NotFound'
+import CommentPage from './Routes/CommentPage'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
@@ -18,12 +19,14 @@ class App extends Component {
                 <Link to = "/articles">Articles</Link>
                 <Link to = "/counter">Counter</Link>
                 <Link to = "/filters">Filters</Link>
+                <Link to = "/comments/1">Comments</Link>
                 <UserForm />
                 <Switch>
                     <Route path = "/articles/new" render = {this.getNewArticle} exact />
                     <Route path = "/articles" component = {ArticlesPage} />
                     <Route path = "/counter" component = {Counter} />
                     <Route path = "/filters" component = {Filters} />
+                    <Route path = "/comments" component = {CommentPage} />
                     <Route path = "*" component = {NotFoundPage} />
                 </Switch>
             </div>

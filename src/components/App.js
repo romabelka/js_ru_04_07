@@ -5,6 +5,7 @@ import NotFoundPage from './Routes/NotFound'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
+import CommentsWithPagination from './CommentsWithPagination'
 import { Route, Link, Switch } from 'react-router-dom'
 
 class App extends Component {
@@ -15,15 +16,17 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Link to = "/articles">Articles</Link>
-                <Link to = "/counter">Counter</Link>
-                <Link to = "/filters">Filters</Link>
+                <Link to = "/articles">Articles</Link><br/>
+                <Link to = "/counter">Counter</Link><br/>
+                <Link to = "/filters">Filters</Link><br/>
+                <Link to = "/comments/1">All Comments</Link><br/>
                 <UserForm />
                 <Switch>
                     <Route path = "/articles/new" render = {this.getNewArticle} exact />
                     <Route path = "/articles" component = {ArticlesPage} />
                     <Route path = "/counter" component = {Counter} />
                     <Route path = "/filters" component = {Filters} />
+                    <Route path = "/comments/:page" render = {this.getCommentsByPage} />
                     <Route path = "*" component = {NotFoundPage} />
                 </Switch>
             </div>
@@ -31,6 +34,11 @@ class App extends Component {
     }
 
     getNewArticle = () => <h1>New Article Page</h1>
+
+    getCommentsByPage  = ({match}) => {
+        const {page} = match.params
+        return <CommentsWithPagination page = {page} />
+    }
 }
 
 export default App

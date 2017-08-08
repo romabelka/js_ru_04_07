@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ArticlesPage from './Routes/ArticlesPage'
 import NotFoundPage from './Routes/NotFound'
+import CommentsPage from './Routes/CommentsPage'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
@@ -24,6 +25,7 @@ class App extends Component {
                     <Route path = "/articles" component = {ArticlesPage} />
                     <Route path = "/counter" component = {Counter} />
                     <Route path = "/filters" component = {Filters} />
+                    <Route path='/comments' component={CommentsPage}/>
                     <Route path = "*" component = {NotFoundPage} />
                 </Switch>
             </div>

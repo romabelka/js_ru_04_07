@@ -7,6 +7,7 @@ import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
 import { Route, Redirect, Link, Switch } from 'react-router-dom'
+import Menu, { MenuItem } from './Menu'
 
 class App extends Component {
     static propTypes = {
@@ -16,10 +17,12 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Link to = "/articles">Articles</Link>
-                <Link to = "/counter">Counter</Link>
-                <Link to = "/filters">Filters</Link>
-                <Link to = "/comments">comments</Link>
+                <Menu>
+                    <MenuItem to = "/articles"/>
+                    <MenuItem to = "/counter"/>
+                    <MenuItem to = "/filters"/>
+                    <MenuItem to = "/comments"/>
+                </Menu>
                 <UserForm />
                 <Switch>
                     <Redirect from = "/" exact to = "/articles" />

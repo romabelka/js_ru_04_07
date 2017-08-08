@@ -1,11 +1,19 @@
 import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT,
-    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, START, SUCCESS, FAIL} from '../constants'
+    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS, START, SUCCESS, FAIL, SET_CURRENT_PAGE} from '../constants'
 
 export function increment() {
     return {
         type: INCREMENT
     }
 }
+export function loadComments(page) {
+    return {
+        type: LOAD_COMMENTS,
+        payload: { page },
+        callAPI: `/api/comment?limit=5&offset=${page}`
+    }
+}
+
 
 export function deleteArticle(id) {
     return {

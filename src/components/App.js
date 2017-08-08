@@ -14,6 +14,21 @@ class App extends Component {
 
     };
 
+    state = {
+        username: ''
+    }
+
+    static childContextTypes = {
+        user: PropTypes.string
+    }
+
+    getChildContext() {
+        return {
+            user: this.state.username
+        }
+    }
+
+
     render() {
         return (
             <div>
@@ -23,7 +38,7 @@ class App extends Component {
                     <MenuItem to = "/filters"/>
                     <MenuItem to = "/comments"/>
                 </Menu>
-                <UserForm />
+                <UserForm value = {this.state.username} onChange = {this.handleUserChange} />
                 <Switch>
                     <Redirect from = "/" exact to = "/articles" />
                     <Route path = "/articles/new" render = {this.getNewArticle} exact />
@@ -36,6 +51,8 @@ class App extends Component {
             </div>
         )
     }
+
+    handleUserChange = username => this.setState({ username })
 
     getNewArticle = () => <h1>New Article Page</h1>
 }

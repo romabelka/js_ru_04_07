@@ -6,34 +6,16 @@ class UserForm extends Component {
 
     };
 
-    state = {
-        username: 'Roma'
-    }
-
     render() {
         return (
             <div>
-                username: <input type = "text" value = {this.state.username} onChange = {this.handleChange} />
+                username: <input type = "text" value = {this.props.value} onChange = {this.handleChange} />
             </div>
         )
     }
 
     handleChange = ev => {
-        if (ev.target.value.length > 15) {
-            return this.setState({
-                username: ''
-            })
-        }
-
-        this.setState({
-            username: ev.target.value
-        })
-
-/*
-        this.setState({
-            username: ''
-        })
-*/
+        this.props.onChange(ev.target.value)
     }
 }
 

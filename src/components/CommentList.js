@@ -7,7 +7,13 @@ import toggleOpen from '../decorators/toggleOpen'
 import { loadArticleComments } from '../AC'
 import { connect } from 'react-redux'
 
-class CommentList extends Comment {
+class CommentList extends Component {
+    static contextTypes = {
+        store: PropTypes.object,
+        user: PropTypes.string,
+        router: PropTypes.object
+    }
+
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
         if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
             loadArticleComments(article.id)

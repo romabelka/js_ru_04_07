@@ -28,6 +28,7 @@ class Article extends Component {
 
     render() {
         const { article, toggleOpen } = this.props
+        console.log('---', 3)
         if (!article) return null
         return (
             <div>
@@ -65,4 +66,4 @@ class Article extends Component {
 
 export default connect((state, {id}) => ({
     article: state.articles.getIn(['entities', id])
-}), { loadArticle })(Article)
+}), { loadArticle }, null, { pure: false })(Article)

@@ -10,6 +10,7 @@ class ArticlesPage extends Component {
     };
 
     render() {
+        console.log('---', 2)
         return (
             <div>
                 <h3>Articles Page:</h3>

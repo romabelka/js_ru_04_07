@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {deleteArticle, loadAllArticles} from '../AC'
 import {filteredArticlesSelector} from '../selectors'
 import Loader from './Loader'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 class ArticlesList extends Component {
     render() {
@@ -14,7 +14,7 @@ class ArticlesList extends Component {
 
         const articleElements = articles.map(article => (
             <li key = {article.id}>
-                <Link to = {`/articles/${article.id}`}>{article.title}</Link>
+                <NavLink to = {`/articles/${article.id}`} activeStyle = {{ color: 'red' }}>{article.title}</NavLink>
             </li>
         ))
         return (
@@ -42,5 +42,7 @@ export default connect(
         articles: filteredArticlesSelector(state),
         loading: state.articles.loading
     }),
-    { deleteArticle, loadAllArticles }
+    { deleteArticle, loadAllArticles },
+    null,
+    { pure: false }
 )(ArticlesList)

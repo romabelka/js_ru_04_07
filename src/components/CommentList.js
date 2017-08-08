@@ -22,8 +22,10 @@ class CommentList extends Component {
 
     render() {
         const {isOpen, toggleOpen} = this.props
+        console.log('---', 4)
         return (
             <div>
+                <h3>Username: {this.context.user}</h3>
                 <button onClick={toggleOpen}>{isOpen ? 'hide' : 'show'} comments</button>
                 {this.getBody()}
             </div>
@@ -57,4 +59,4 @@ CommentList.defaultProps = {
     isOpen: PropTypes.bool
 }
 
-export default connect(null, { loadArticleComments })(toggleOpen(CommentList))
+export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(CommentList))

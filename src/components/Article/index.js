@@ -15,7 +15,7 @@ class Article extends Component {
         handleDelete: PropTypes.func,
         //from connect
         article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
+            title: PropTypes.string,
             text: PropTypes.string,
             comments: PropTypes.array
         })

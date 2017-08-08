@@ -6,7 +6,7 @@ import CommentsPage from './Routes/CommentsPage'
 import UserForm from './UserForm'
 import Filters from './Filters'
 import Counter from './Counter'
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Redirect, Link, Switch } from 'react-router-dom'
 
 class App extends Component {
     static propTypes = {
@@ -19,8 +19,10 @@ class App extends Component {
                 <Link to = "/articles">Articles</Link>
                 <Link to = "/counter">Counter</Link>
                 <Link to = "/filters">Filters</Link>
+                <Link to = "/comments">comments</Link>
                 <UserForm />
                 <Switch>
+                    <Redirect from = "/" exact to = "/articles" />
                     <Route path = "/articles/new" render = {this.getNewArticle} exact />
                     <Route path = "/articles" component = {ArticlesPage} />
                     <Route path = "/counter" component = {Counter} />

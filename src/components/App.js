@@ -8,6 +8,7 @@ import Filters from './Filters'
 import Counter from './Counter'
 import { Route, Redirect, Link, Switch } from 'react-router-dom'
 import Menu, { MenuItem } from './Menu'
+import LanguageBar from './LanguageBar'
 
 class App extends Component {
     static propTypes = {
@@ -15,16 +16,19 @@ class App extends Component {
     };
 
     state = {
-        username: ''
+        username: '',
+        language: 'en'
     }
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.string
     }
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
+            lang: this.state.language
         }
     }
 
@@ -33,6 +37,7 @@ class App extends Component {
         console.log('---', 1)
         return (
             <div>
+                <LanguageBar handleClick = {this.handleLanguageClick}/>
                 <Menu>
                     <MenuItem to = "/articles"/>
                     <MenuItem to = "/counter"/>
@@ -56,6 +61,13 @@ class App extends Component {
     handleUserChange = username => this.setState({ username })
 
     getNewArticle = () => <h1>New Article Page</h1>
+
+    handleLanguageClick = language => (ev) => {
+        ev.preventDefault()
+
+        this.setState({language})
+    }
+
 }
 
 export default App

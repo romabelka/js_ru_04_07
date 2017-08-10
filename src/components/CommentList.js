@@ -6,6 +6,7 @@ import CommentForm from './CommentForm'
 import toggleOpen from '../decorators/toggleOpen'
 import { loadArticleComments } from '../AC'
 import { connect } from 'react-redux'
+import localization from '../decorators/localization'
 
 class CommentList extends Component {
     static contextTypes = {
@@ -26,7 +27,7 @@ class CommentList extends Component {
         return (
             <div>
                 <h3>Username: {this.context.user}</h3>
-                <button onClick={toggleOpen}>{isOpen ? 'hide' : 'show'} comments</button>
+                <button onClick={toggleOpen}>{isOpen ? this.props.dict.hide_comments : this.props.dict.show_comments}</button>
                 {this.getBody()}
             </div>
         )
@@ -59,4 +60,4 @@ CommentList.defaultProps = {
     isOpen: PropTypes.bool
 }
 
-export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(CommentList))
+export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(localization(CommentList)))

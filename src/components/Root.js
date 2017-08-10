@@ -4,6 +4,8 @@ import App from './App'
 import {Provider} from 'react-redux'
 import {ConnectedRouter as Router} from 'react-router-redux'
 import history from '../history'
+import LocalizationProvider from './LocalizationProvider'
+import dictionary from '../dictionary'
 
 class Root extends Component {
     static propTypes = {
@@ -14,7 +16,9 @@ class Root extends Component {
         return (
             <Provider store = {this.props.store}>
                 <Router history = {history}>
-                    <App />
+                    <LocalizationProvider local = {dictionary}>
+                        <App />
+                    </LocalizationProvider>
                 </Router>
             </Provider>
         )

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {addComment} from '../../AC'
+import localization from '../../decorators/localization'
 import './style.css'
 
 class CommentForm extends Component {
@@ -16,15 +17,17 @@ class CommentForm extends Component {
     }
 
     render() {
+        const dict = this.props.dict
+
         return (
             <form onSubmit = {this.handleSubmit}>
-                user: <input value = {this.state.user}
+                {dict.user}: <input value = {this.state.user}
                              onChange = {this.handleChange('user')}
                              className = {this.getClassName('user')} />
-                comment: <input value = {this.state.text}
+                {dict.comment}: <input value = {this.state.text}
                                 onChange = {this.handleChange('text')}
                                 className = {this.getClassName('text')} />
-                <input type = "submit" value = "submit"/>
+                <input type = "submit" value = {dict.submit}/>
             </form>
         )
     }
@@ -63,4 +66,4 @@ const limits = {
 
 export default connect(null, (dispatch, ownProps) => ({
     addComment: (comment) => dispatch(addComment(comment, ownProps.articleId))
-}))(CommentForm)
+}))(localization(CommentForm))

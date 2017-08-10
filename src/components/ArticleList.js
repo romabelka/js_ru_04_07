@@ -18,9 +18,12 @@ class ArticlesList extends Component {
             </li>
         ))
         return (
-            <ul>
-                {articleElements}
-            </ul>
+            <div>
+                <ul>
+                    {articleElements}
+                </ul>
+                {this.props.children}
+            </div>
         )
     }
 

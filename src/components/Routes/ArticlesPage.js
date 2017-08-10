@@ -14,8 +14,9 @@ class ArticlesPage extends Component {
         return (
             <div>
                 <h3>Articles Page:</h3>
-                <ArticleList />
-                <Route path = "/articles/:id" children = {this.getArticlePage}/>
+                <ArticleList>
+                    <Route path = "/articles/:id" children = {this.getArticlePage}/>
+                </ArticleList>
             </div>
         )
     }

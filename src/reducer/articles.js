@@ -35,7 +35,7 @@ export default (articleState = new ReducerState, action) => {
 
         case LOAD_ALL_ARTICLES + SUCCESS:
             return articleState
-                .set('entities', arrToMap(response, ArticleRecord))
+                .updateIn(['entities'], entities => arrToMap(response, ArticleRecord).merge(entities))
                 .set('loading', false)
                 .set('loaded', true)
 

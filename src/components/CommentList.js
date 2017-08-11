@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Loader from './Loader'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
+import LocalizedText from './LocalizedText'
 import toggleOpen from '../decorators/toggleOpen'
 import { loadArticleComments } from '../AC'
 import { connect } from 'react-redux'
@@ -22,11 +23,11 @@ class CommentList extends Component {
 
     render() {
         const {isOpen, toggleOpen} = this.props
-        console.log('---', 4)
+        const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
                 <h3>Username: {this.context.user}</h3>
-                <button onClick={toggleOpen}>{isOpen ? 'hide' : 'show'} comments</button>
+                <button onClick={toggleOpen}><LocalizedText>{text}</LocalizedText></button>
                 {this.getBody()}
             </div>
         )
@@ -42,7 +43,7 @@ class CommentList extends Component {
             <ul>
                 {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
             </ul>
-        ) : <h3>No comments yet</h3>
+        ) : <h3><LocalizedText>No comments yet</LocalizedText></h3>
 
         return (
             <div>
